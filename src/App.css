@@ -70,6 +70,7 @@
   align-items: center;
 }
 .border-png {
+  position: relative;
   width: 100%;
   height: 550px;
 }
@@ -88,8 +89,8 @@
 
   width: 142px;
   height: 43px;
-  left: 689px;
-  top: 233px;
+  left: 1/2;
+  top: 220px;
   font-family: "Rubik";
   font-style: normal;
   font-weight: 500;
@@ -105,8 +106,8 @@
   display: flex;
   width: 290px;
   height: 40px;
-  left: 620px;
-  top: 307px;
+  left: 1/2;
+  top: 1/6;
   gap: 1em;
 }
 .join-team {
@@ -546,4 +547,24 @@
   width: 35px;
   height: 35px;
   cursor: pointer;
+}
+@media only screen and (max-width: 620px) {
+  /* For mobile phones: */
+  .jobdetail-main {
+    width: 100%;
+  }
+  .row-detail {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 5%;
+  }
+  .tabs-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .tab {
+    width: 100%;
+  }
 }
