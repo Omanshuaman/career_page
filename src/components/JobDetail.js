@@ -2,6 +2,16 @@ import React from "react";
 import Image from "../assests/Rectangle.svg";
 import Ellipse from "../assests/ellipse.svg";
 import Location from "../assests/location.svg";
+import JobType from "../assests/jobType.svg";
+import DatePosted from "../assests/datePosted.svg";
+import Experience from "../assests/experience.svg";
+import WorkingHours from "../assests/workingHours.svg";
+import WorkingDays from "../assests/workingDays.svg";
+import Vacancy from "../assests/vacancy.svg";
+import Instagram from "../assests/Instagram.svg";
+import Facebook from "../assests/Facebook.svg";
+import Twitter from "../assests/Twiter.svg";
+import Linkedin from "../assests/Linkedin.svg";
 
 const JobDetail = () => {
   return (
@@ -301,32 +311,128 @@ const JobDetail = () => {
               </div>
             </div>
           </div>
-          <div className="apply-detail">
-            <button className="apply-button">Apply Now</button>
-            <div className="job-summary">
-              <div className="job-summarytext">Job Summary</div>
-              <div className="job-row">
-                <div className="vector-location">
-                  <img
-                    src={Location}
-                    alt="Your SVG"
-                    className="location-svg"
-                  ></img>
-                </div>
-                <div className="location-text">
-                  <div>Location</div>
-                  <div>Shouth Breeze Center,Banani11</div>
+          <div className="side-apply">
+            <div className="apply-detail">
+              <button className="apply-button">Apply Now</button>
+              <div className="job-summary">
+                <div className="job-summarytext">Job Summary</div>
+                <div className="job-row">
+                  <div className="vector-location">
+                    <img
+                      src={Location}
+                      alt="Your SVG"
+                      className="location-svg"
+                    ></img>
+                  </div>
+                  <div className="location-text">
+                    <div className="location-blur">Location</div>
+                    <div className="location-text">
+                      Shouth Breeze Center,Banani11
+                    </div>
+                  </div>
                 </div>
               </div>
+              <div className="job-summary">
+                <div className="job-row">
+                  <div className="vector-location">
+                    <img
+                      src={JobType}
+                      alt="Your SVG"
+                      className="location-svg"
+                    ></img>
+                  </div>
+                  <div className="location-text">
+                    <div className="location-blur">Job Type</div>
+                    <div className="location-text">Full Time</div>
+                  </div>
+                </div>
+              </div>
+              <div className="job-summary">
+                <div className="job-row">
+                  <div className="vector-location">
+                    <img
+                      src={DatePosted}
+                      alt="Your SVG"
+                      className="location-svg"
+                    ></img>
+                  </div>
+                  <div className="location-text">
+                    <div className="location-blur">Date posted</div>
+                    <div className="location-text">posted 1 month ago</div>
+                  </div>
+                </div>
+              </div>
+              <div className="job-summary">
+                <div className="job-row">
+                  <div className="vector-location">
+                    <img
+                      src={Experience}
+                      alt="Your SVG"
+                      className="location-svg"
+                    ></img>
+                  </div>
+                  <div className="location-text">
+                    <div className="location-blur">Experience</div>
+                    <div className="location-text">Experience: 1-3 year</div>
+                  </div>
+                </div>
+              </div>
+              <div className="job-summary">
+                <div className="job-row">
+                  <div className="vector-location">
+                    <img
+                      src={WorkingHours}
+                      alt="Your SVG"
+                      className="location-svg"
+                    ></img>
+                  </div>
+                  <div className="location-text">
+                    <div className="location-blur">Working Hours</div>
+                    <div className="location-text">9 AM - 6 PM</div>
+                  </div>
+                </div>
+              </div>
+              <div className="job-summary">
+                <div className="job-row">
+                  <div className="vector-location">
+                    <img
+                      src={WorkingDays}
+                      alt="Your SVG"
+                      className="location-svg"
+                    ></img>
+                  </div>
+                  <div className="location-text">
+                    <div className="location-blur">Working Days</div>
+                    <div className="location-text">Weekly:5days</div>
+                  </div>
+                </div>
+              </div>
+              <div className="job-summary">
+                <div className="job-row">
+                  <div className="vector-location">
+                    <img
+                      src={Vacancy}
+                      alt="Your SVG"
+                      className="location-svg"
+                    ></img>
+                  </div>
+                  <div className="location-text">
+                    <div className="location-blur">Vacancy</div>
+                    <div className="location-text">No.of Vacancy:3</div>
+                  </div>
+                </div>
+              </div>{" "}
+              <div className="job-summary">
+                <div className="viewall">View All Jobs</div>
+              </div>
+            </div>{" "}
+            <div>Share this:</div>
+            <div className="share-row">
+              <img src={Facebook} alt="Your SVG" className="social-svg"></img>
+              <img src={Twitter} alt="Your SVG" className="social-svg"></img>
+              <img src={Linkedin} alt="Your SVG" className="social-svg"></img>
+              <img src={Instagram} alt="Your SVG" className="social-svg"></img>
             </div>
-
-            <div>dcd</div>
-            <div>dc</div>
-            <div>dcd</div>
-            <div>dc</div>
-            <div>dcd</div>
-            <div>dc</div>
-            <div>dcd</div>
           </div>
         </div>
       </div>

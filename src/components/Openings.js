@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import Next from "../assests/next.svg";
+import { useNavigate } from "react-router-dom";
 
 const Openings = () => {
   const [activeTab, setActiveTab] = useState("Paris");
+  let navigate = useNavigate();
 
   const openCity = (cityName) => {
     setActiveTab(cityName);
   };
+  const nextPage = () => {
+    navigate("/jobDescription");
+  };
+
   return (
     <div className="openings-container">
       <div className="title">
@@ -65,7 +71,7 @@ const Openings = () => {
           id="Paris"
           className={activeTab === "Paris" ? "tabcontent" : "tabcontent hidden"}
         >
-          <div className="job-container">
+          <div className="job-container" onClick={() => nextPage()}>
             <div className="job-name">Wordpress Developer</div>
             <div className="experience">
               <div className="experience-text">Experience</div>

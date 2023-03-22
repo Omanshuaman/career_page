@@ -469,8 +469,8 @@
   color: #001833;
 }
 .apply-detail {
-  flex: 1;
-  height: 1099px;
+  width: 100%;
+  height: 1000px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -480,29 +480,69 @@
 .job-summary {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 .job-summarytext {
-  width: 125px;
-  height: 24px;
   font-family: "Rubik";
   font-style: normal;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 14px;
   line-height: 24px;
-  text-align: center;
-
+  text-align: start;
+  margin-left: 40px;
+  margin-bottom: 10px;
   color: #000000;
 }
 .job-row {
   display: flex;
   width: 100%;
-  justify-content: center;
+  align-items: center;
+  margin-left: 40px;
+  gap: 10px;
 }
 .location-text {
   display: flex;
   flex-direction: column;
 }
 .location-svg {
+  width: 30px;
+  height: 30px;
+}
+.location-blur {
+  color: #d4d4d4;
+}
+.location-text {
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 24px;
+  /* or 141% */
+}
+.viewall {
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 24px;
+  text-decoration-line: underline;
+  margin-left: 40px;
+  color: #001833;
+  cursor: pointer;
+}
+.side-apply {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  flex: 1;
+  height: 1099px;
+}
+.share-row {
+  display: flex;
+  gap: 8px;
+}
+.social-svg {
   width: 35px;
   height: 35px;
+  cursor: pointer;
 }
