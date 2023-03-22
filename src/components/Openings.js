@@ -86,7 +86,7 @@ const Openings = () => {
               <img src={Next} alt="Your SVG" className="next-svg" />
             </div>
           </div>
-          <div className="job-container">
+          <div className="job-container" onClick={() => nextPage()}>
             <div className="job-name">Javascript</div>
             <div className="experience">
               <div className="experience-text">Experience</div>
