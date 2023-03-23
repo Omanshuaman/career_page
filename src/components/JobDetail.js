@@ -444,7 +444,7 @@ const JobDetail = () => {
                 <div className="viewall">View All Jobs</div>
               </div>
             </div>{" "}
-            <div>Share this:</div>
+            <div className="share-this">Share this:</div>
             <div className="share-row">
               <img src={Facebook} alt="Your SVG" className="social-svg"></img>
               <img src={Twitter} alt="Your SVG" className="social-svg"></img>
