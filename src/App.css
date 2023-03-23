@@ -569,6 +569,7 @@
     width: 100%;
   }
   .tab {
+    display: flex;
     width: 100%;
   }
 }
