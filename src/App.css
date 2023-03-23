@@ -572,6 +572,39 @@
     display: flex;
     width: 100%;
   }
+  .career-description {
+    font-size: 12px;
+    width: 450px;
+  }
+  .job-container {
+    width: 90%;
+    margin-left: 2em;
+    margin-right: 2em;
+  }
+  .job-name {
+    width: 150px;
+    font-size: 14px;
+  }
+  .experience-text {
+    width: 80px;
+    font-size: 10px;
+  }
+  .experience-year {
+    width: 80px;
+    font-size: 16px;
+  }
+  .deadline-text {
+    width: 80px;
+    font-size: 10px;
+  }
+  .deadline-year {
+    width: 140px;
+    font-size: 16px;
+  }
+  .next-svg {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 body.active-modal {
