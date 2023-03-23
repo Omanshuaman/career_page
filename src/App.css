@@ -515,83 +515,84 @@
   }
   /* Style the buttons inside the tab */
   .tab button {
-    margin: 2em;
     font-size: 10px;
     text-align: center;
   }
   .career-description {
     font-size: 12px;
-    width: 450px;
+    width: 400px;
   }
   .job-container {
     width: 90%;
-    margin-left: 2em;
+    margin-left: 1em;
     margin-right: 2em;
   }
   .job-name {
     width: 150px;
-    font-size: 14px;
+    font-size: 12px;
+    margin-left: 1em;
   }
   .experience-text {
     width: 80px;
-    font-size: 10px;
+    font-size: 8px;
   }
   .experience-year {
     width: 80px;
-    font-size: 16px;
+    font-size: 14px;
   }
   .deadline-text {
     width: 80px;
-    font-size: 10px;
+    font-size: 8px;
   }
   .deadline-year {
     width: 140px;
-    font-size: 16px;
+    font-size: 14px;
   }
   .next-svg {
     width: 16px;
     height: 16px;
+    margin-right: 1em;
   }
   .image-svg {
     width: 90%;
     margin: 1em;
-    height: 350px;
+    height: 250px;
+  }
+
+  .headline {
+    width: 366px;
+    font-size: 30px;
+  }
+  .headline-small {
+    width: 90%;
+
+    font-size: 20px;
+  }
+  .ellipse-svg {
+    width: 6px;
+    height: 6px;
+  }
+  .description-small {
+    width: 400px;
+    font-size: 14px;
+  }
+  .apply-detail {
+    margin-left: 2em;
+    width: 90%;
+  }
+  .share-row {
+    width: 90%;
+  }
+  .job-column-desc {
+    width: 80%;
+  }
+  .side-apply {
+    width: 90%;
+  }
+  body {
+    overflow-x: hidden;
   }
 }
-.headline {
-  width: 366px;
-  font-size: 30px;
-}
-.headline-small {
-  width: 90%;
-
-  font-size: 20px;
-}
-.ellipse-svg {
-  width: 6px;
-  height: 6px;
-}
-.description-small {
-  width: 400px;
-  font-size: 14px;
-}
-.apply-detail {
-  margin-left: 2em;
-  width: 90%;
-}
-.share-row {
-  width: 90%;
-}
-.job-column-desc {
-  width: 80%;
-}
-.side-apply {
-  width: 90%;
-}
-body {
-  overflow-x: hidden;
-}
-
 body.active-modal {
   overflow-y: hidden;
 }
@@ -632,6 +633,7 @@ body.active-modal {
   top: 10px;
   right: 10px;
   padding: 5px 7px;
+  cursor: pointer;
 }
 .name {
   display: flex;
