@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Image from "../assests/Rectangle.svg";
-import Ellipse from "../assests/ellipse.svg";
 import Location from "../assests/location.svg";
 import JobType from "../assests/jobType.svg";
 import DatePosted from "../assests/datePosted.svg";
@@ -13,11 +12,13 @@ import Facebook from "../assests/Facebook.svg";
 import Twitter from "../assests/Twiter.svg";
 import Linkedin from "../assests/Linkedin.svg";
 import Modal from "./Modal";
+import { useNavigate } from "react-router-dom";
 
 const JobDetail = ({ filteredApplicants }) => {
   console.log(filteredApplicants);
   // Use the filteredApplicants prop here
   const [modal, setModal] = useState(false);
+  let navigate = useNavigate();
 
   const openModal = () => {
     setModal(!modal);
@@ -28,7 +29,9 @@ const JobDetail = ({ filteredApplicants }) => {
   } else {
     document.body.classList.remove("active-modal");
   }
-
+  const nextPage = () => {
+    navigate("/");
+  };
   return (
     <div className="jobdetail">
       <div className="jobdetail-main">
@@ -37,24 +40,30 @@ const JobDetail = ({ filteredApplicants }) => {
         </div>
         <div className="row-detail">
           <div className="job-column-desc">
-            <div className="headline">PRODUCT DESIGNER</div>
+            <div className="headline">{filteredApplicants[0].role}</div>
             <div className="headline-small">Who Are We Looking For</div>
             <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
               <div className="description-small">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                {filteredApplicants[0].what_we_are_looking_for
+                  .split(".")
+                  .map((item) => (
+                    <p key={item}>
+                      <span className="bullet-icon">&bull;</span> {item.trim()}
+                    </p>
+                  ))}
               </div>
             </div>
 
             <div className="headline-small">What You Will Be Doing</div>
             <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
               <div className="description-small">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                {filteredApplicants[0].what_you_will_be_doing
+                  .split(".")
+                  .map((item) => (
+                    <p key={item}>
+                      <span className="bullet-icon">&bull;</span> {item.trim()}
+                    </p>
+                  ))}
               </div>
             </div>
 
@@ -62,48 +71,55 @@ const JobDetail = ({ filteredApplicants }) => {
               Bonus Points for Familiarity with
             </div>
             <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
               <div className="description-small">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                {filteredApplicants[0].bonus_point.split(".").map((item) => (
+                  <p key={item}>
+                    <span className="bullet-icon">&bull;</span> {item.trim()}
+                  </p>
+                ))}
               </div>
             </div>
 
             <div className="headline-small">Educational Requirement</div>
             <div className="description-small">
-              Contrary to popular belief, Lorem Ipsum is not simply random text.
-              It has roots in a piece of classical Latin literature from 45 BC,
-              making it over 2000 years old. Richard McClintock, a Latin
-              professor at Hampden-Sydney College in Virginia, looked up one of
-              the more obscure Latin words, consectetur, from a Lorem Ipsum
-              passage, and going
+              {filteredApplicants[0].bonus_point.split(".").map((item) => (
+                <p key={item}>
+                  <span className="bullet-icon">&bull;</span>{" "}
+                  {"B.tech , M.tech"}
+                </p>
+              ))}
             </div>
             <div className="headline-small">Salary</div>
             <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
               <div className="description-small">
-                Salary: 18,000 to 35,000 BDT (Depends on Skill and Experience)
+                {filteredApplicants[0].salary.split(".").map((item) => (
+                  <p key={item}>
+                    <span className="bullet-icon">&bull;</span> {item.trim()}
+                  </p>
+                ))}
               </div>
             </div>
 
             <div className="headline-small">Working Days</div>
             <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
+              <div className="description-small">
+                {filteredApplicants[0].working_days.split(".").map((item) => (
+                  <p key={item}>
+                    <span className="bullet-icon">&bull;</span> {item.trim()}
+                  </p>
+                ))}
               </div>
-              <div className="description-small">Weekly: 5 days.</div>
             </div>
 
             <div className="headline-small">Perks & Benefits You’ll Get </div>
             <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
               <div className="description-small">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                {filteredApplicants[0].working_days.split(".").map((item) => (
+                  <p key={item}>
+                    <span className="bullet-icon">&bull;</span>{" "}
+                    {"Health insurance, Informal dress code"}
+                  </p>
+                ))}
               </div>
             </div>
           </div>
@@ -125,7 +141,7 @@ const JobDetail = ({ filteredApplicants }) => {
                   <div className="location-text">
                     <div className="location-blur">Location</div>
                     <div className="location-text">
-                      Shouth Breeze Center,Banani11
+                      {filteredApplicants[0].location}
                     </div>
                   </div>
                 </div>
@@ -141,7 +157,9 @@ const JobDetail = ({ filteredApplicants }) => {
                   </div>
                   <div className="location-text">
                     <div className="location-blur">Job Type</div>
-                    <div className="location-text">Full Time</div>
+                    <div className="location-text">
+                      {filteredApplicants[0].job_type}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -156,7 +174,9 @@ const JobDetail = ({ filteredApplicants }) => {
                   </div>
                   <div className="location-text">
                     <div className="location-blur">Date posted</div>
-                    <div className="location-text">posted 1 month ago</div>
+                    <div className="location-text">
+                      {filteredApplicants[0].job_post_date}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -171,7 +191,9 @@ const JobDetail = ({ filteredApplicants }) => {
                   </div>
                   <div className="location-text">
                     <div className="location-blur">Experience</div>
-                    <div className="location-text">Experience: 1-3 year</div>
+                    <div className="location-text">
+                      {filteredApplicants[0].experience}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -186,7 +208,9 @@ const JobDetail = ({ filteredApplicants }) => {
                   </div>
                   <div className="location-text">
                     <div className="location-blur">Working Hours</div>
-                    <div className="location-text">9 AM - 6 PM</div>
+                    <div className="location-text">
+                      {filteredApplicants[0].working_hour}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -201,7 +225,9 @@ const JobDetail = ({ filteredApplicants }) => {
                   </div>
                   <div className="location-text">
                     <div className="location-blur">Working Days</div>
-                    <div className="location-text">Weekly:5days</div>
+                    <div className="location-text">
+                      {filteredApplicants[0].working_days}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -216,14 +242,18 @@ const JobDetail = ({ filteredApplicants }) => {
                   </div>
                   <div className="location-text">
                     <div className="location-blur">Vacancy</div>
-                    <div className="location-text">No.of Vacancy:3</div>
+                    <div className="location-text">
+                      {filteredApplicants[0].number_of_vacancy}
+                    </div>
                   </div>
                 </div>
-              </div>{" "}
-              <div className="job-summary">
-                <div className="viewall">View All Jobs</div>
               </div>
-            </div>{" "}
+              <div className="job-summary">
+                <div className="viewall" onClick={nextPage}>
+                  View All Jobs
+                </div>
+              </div>
+            </div>
             <div className="share-this">Share this:</div>
             <div className="share-row">
               <img src={Facebook} alt="Your SVG" className="social-svg"></img>

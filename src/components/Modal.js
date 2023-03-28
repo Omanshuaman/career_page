@@ -34,7 +34,7 @@ const Modal = ({ modal, setModal, openModal }) => {
       setContact(value);
       setContactError("");
     } else {
-      setContactError("Contact number should be 10 or less than 10");
+      setContactError("* Contact number should be 10 or less than 10");
     }
   };
 
@@ -98,8 +98,11 @@ const Modal = ({ modal, setModal, openModal }) => {
             type="number"
             className="name-input"
             required
+            min="5"
+            max="10"
             onChange={handleContactChange}
           />
+
           {contactError && <div className="error">{contactError}</div>}
           <div className="name">Upload Resume/CV:</div>
           <input

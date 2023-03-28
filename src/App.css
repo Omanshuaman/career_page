@@ -395,11 +395,11 @@
   display: flex;
   gap: 1em;
 }
-
-.ellipse-svg {
-  width: 8px;
-  height: 8px;
+.bullet-icon {
+  font-size: 1.2em; /* adjust the size to your liking */
+  margin-right: 0.5em;
 }
+
 .description-small {
   width: 565px;
 
@@ -442,7 +442,7 @@
   width: 100%;
   align-items: center;
   margin-left: 40px;
-  gap: 10px;
+  gap: 0.8em;
 }
 .location-text {
   display: flex;
@@ -451,6 +451,7 @@
 .location-svg {
   width: 30px;
   height: 30px;
+  margin-top: 0.5em;
 }
 .location-blur {
   color: #d4d4d4;
@@ -568,10 +569,7 @@
 
     font-size: 20px;
   }
-  .ellipse-svg {
-    width: 6px;
-    height: 6px;
-  }
+
   .description-small {
     width: 400px;
     font-size: 14px;
@@ -656,6 +654,11 @@ body.active-modal {
   border: 1px solid #a6bcda;
   border-radius: 4px;
 }
+.error {
+  color: red;
+  font-size: 14px;
+}
+
 .card-form {
   display: flex;
   flex-direction: column;

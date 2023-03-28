@@ -14,18 +14,17 @@ const Banner = ({ filteredApplicants }) => {
   }
   return (
     <div className="banner">
-      {filteredApplicants.map((applicant) => (
-        <div className="banner-column" key={applicant.id}>
-          <div className="banner-text1">{applicant.role}</div>
-          <div className="banner-text2">
-            Job Type: {applicant.job_type} | No of Vacancies:{" "}
-            {applicant.number_of_vacancy}
-          </div>
-          <button className="apply-button" onClick={() => openModal()}>
-            Apply Now
-          </button>
+      <div className="banner-column">
+        <div className="banner-text1">{filteredApplicants[0].role}</div>
+        <div className="banner-text2">
+          Job Type: {filteredApplicants[0].job_type} | No of Vacancies:
+          {filteredApplicants[0].number_of_vacancy}
         </div>
-      ))}
+        <button className="apply-button" onClick={() => openModal()}>
+          Apply Now
+        </button>
+      </div>
+
       {modal && (
         <Modal modal={modal} setModal={setModal} openModal={openModal} />
       )}
