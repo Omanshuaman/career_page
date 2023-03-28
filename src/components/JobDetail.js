@@ -12,13 +12,12 @@ import Instagram from "../assests/Instagram.svg";
 import Facebook from "../assests/Facebook.svg";
 import Twitter from "../assests/Twiter.svg";
 import Linkedin from "../assests/Linkedin.svg";
+import Modal from "./Modal";
 
-const JobDetail = () => {
+const JobDetail = ({ filteredApplicants }) => {
+  console.log(filteredApplicants);
+  // Use the filteredApplicants prop here
   const [modal, setModal] = useState(false);
-  const [name, setName] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [contact, setContact] = useState(null);
-  const [resume, setResume] = useState(null);
 
   const openModal = () => {
     setModal(!modal);
@@ -48,57 +47,7 @@ const JobDetail = () => {
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               </div>
             </div>
-            <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
-              <div className="description-small">
-                Nullam dictum ligula a gravida porta.
-              </div>
-            </div>
-            <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
-              <div className="description-small">
-                Nam pellentesque orci ut odio blandit, sit amet elementum augue
-                venenatis.
-              </div>
-            </div>
-            <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
-              <div className="description-small">
-                Vivamus semper magna suscipit leo malesuada, eu dictum velit
-                varius.
-              </div>
-            </div>
-            <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
-              <div className="description-small">
-                Nullam dictum ligula a gravida porta.
-              </div>
-            </div>
-            <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
-              <div className="description-small">
-                Vivamus semper magna suscipit leo malesuada, eu dictum velit
-                varius.
-              </div>
-            </div>
-            <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
-              <div className="description-small">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </div>
-            </div>
+
             <div className="headline-small">What You Will Be Doing</div>
             <div className="detail-row">
               <div className="ellipse">
@@ -108,57 +57,7 @@ const JobDetail = () => {
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               </div>
             </div>
-            <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
-              <div className="description-small">
-                Nullam dictum ligula a gravida porta.
-              </div>
-            </div>
-            <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
-              <div className="description-small">
-                Nam pellentesque orci ut odio blandit, sit amet elementum augue
-                venenatis.
-              </div>
-            </div>
-            <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
-              <div className="description-small">
-                Vivamus semper magna suscipit leo malesuada, eu dictum velit
-                varius.
-              </div>
-            </div>
-            <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
-              <div className="description-small">
-                Nullam dictum ligula a gravida porta.
-              </div>
-            </div>
-            <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
-              <div className="description-small">
-                Vivamus semper magna suscipit leo malesuada, eu dictum velit
-                varius.
-              </div>
-            </div>
-            <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
-              <div className="description-small">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </div>
-            </div>
+
             <div className="headline-small">
               Bonus Points for Familiarity with
             </div>
@@ -170,57 +69,7 @@ const JobDetail = () => {
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               </div>
             </div>
-            <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
-              <div className="description-small">
-                Nullam dictum ligula a gravida porta.
-              </div>
-            </div>
-            <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
-              <div className="description-small">
-                Nam pellentesque orci ut odio blandit, sit amet elementum augue
-                venenatis.
-              </div>
-            </div>
-            <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
-              <div className="description-small">
-                Vivamus semper magna suscipit leo malesuada, eu dictum velit
-                varius.
-              </div>
-            </div>
-            <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
-              <div className="description-small">
-                Nullam dictum ligula a gravida porta.
-              </div>
-            </div>
-            <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
-              <div className="description-small">
-                Vivamus semper magna suscipit leo malesuada, eu dictum velit
-                varius.
-              </div>
-            </div>
-            <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
-              <div className="description-small">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </div>
-            </div>
+
             <div className="headline-small">Educational Requirement</div>
             <div className="description-small">
               Contrary to popular belief, Lorem Ipsum is not simply random text.
@@ -239,12 +88,7 @@ const JobDetail = () => {
                 Salary: 18,000 to 35,000 BDT (Depends on Skill and Experience)
               </div>
             </div>
-            <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
-              <div className="description-small">Salary Review: Yearly</div>
-            </div>
+
             <div className="headline-small">Working Days</div>
             <div className="detail-row">
               <div className="ellipse">
@@ -252,12 +96,7 @@ const JobDetail = () => {
               </div>
               <div className="description-small">Weekly: 5 days.</div>
             </div>
-            <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
-              <div className="description-small">Weekend: Friday.Saturday</div>
-            </div>
+
             <div className="headline-small">Perks & Benefits You’ll Get </div>
             <div className="detail-row">
               <div className="ellipse">
@@ -265,65 +104,6 @@ const JobDetail = () => {
               </div>
               <div className="description-small">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </div>
-            </div>
-            <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
-              <div className="description-small">
-                Nullam dictum ligula a gravida porta.
-              </div>
-            </div>
-            <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
-              <div className="description-small">
-                Nam pellentesque orci ut odio blandit, sit amet elementum augue
-                venenatis.
-              </div>
-            </div>
-            <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
-              <div className="description-small">
-                Nullam dictum ligula a gravida porta.
-              </div>
-            </div>
-            <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
-              <div className="description-small">
-                Nam pellentesque orci ut odio blandit, sit amet elementum augue
-                venenatis.
-              </div>
-            </div>
-            <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
-              <div className="description-small">
-                Nullam dictum ligula a gravida porta.
-              </div>
-            </div>
-            <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
-              <div className="description-small">
-                Nam pellentesque orci ut odio blandit, sit amet elementum augue
-                venenatis.
-              </div>
-            </div>
-            <div className="detail-row">
-              <div className="ellipse">
-                <img src={Ellipse} alt="Your SVG" className="ellipse-svg"></img>
-              </div>
-              <div className="description-small">
-                Nullam dictum ligula a gravida porta.
               </div>
             </div>
           </div>
@@ -455,59 +235,7 @@ const JobDetail = () => {
         </div>
       </div>
       {modal && (
-        <div className="modal">
-          <div className="overlay"></div>
-          <div className="modal-content">
-            <form
-              class="card-form"
-              enctype="multipart/form-data" /* add this attribute to enable file upload */
-
-              //       onSubmit={handleSubmit}
-            >
-              <div className="name">Name</div>
-              <input
-                type="text"
-                className="name-input"
-                required
-                onChange={(e) => setName(e.target.value)}
-              />
-              <div className="name">Email ID</div>
-              <input
-                type="email"
-                className="name-input"
-                required
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <div className="name">Contact Number:</div>
-              <input
-                type="number"
-                className="name-input"
-                required
-                onChange={(e) => setContact(e.target.value)}
-              />
-              <div className="name">Upload Resume/CV:</div>
-              <input
-                type="file"
-                name="resume"
-                className="name-input"
-                accept=".pdf" /* specify accepted file type */
-                required
-                onChange={(e) =>
-                  setResume(e.target.files[0])
-                } /* add onChange event handler to capture file */
-              />
-              <div className="action">
-                <button className="action-button" type="submit">
-                  Upload
-                </button>
-              </div>
-            </form>
-
-            <button className="close-modal" onClick={openModal}>
-              X
-            </button>
-          </div>
-        </div>
+        <Modal modal={modal} setModal={setModal} openModal={openModal} />
       )}
     </div>
   );
