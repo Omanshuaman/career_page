@@ -1,3 +1,7 @@
+body {
+  margin: 0;
+}
+
 .joinus {
   display: flex;
   justify-content: center;

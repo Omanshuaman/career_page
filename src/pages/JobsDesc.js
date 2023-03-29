@@ -11,7 +11,7 @@ const JobsDesc = () => {
     setTimeout(() => setIsVisible(false), 3000);
   };
   const location = useLocation();
-  const filteredApplicants = location.state.jobdesc;
+  const filteredApplicants = location.state.state.jobdesc;
   console.log(filteredApplicants);
   return (
     <div>

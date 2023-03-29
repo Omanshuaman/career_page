@@ -1,5 +1,5 @@
 import Next from "../assests/next.svg";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 
 const Openings = () => {
@@ -17,12 +17,12 @@ const Openings = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  let navigate = useNavigate();
+  const history = useHistory();
   const openCity = (cityName) => {
     setActiveTab(cityName);
   };
   const nextPage = (id, jobdesc) => {
-    navigate(`/${id}`, { state: { jobdesc } });
+    history.push(`/${id}`, { state: { jobdesc } });
     console.log(jobdesc);
   };
   useEffect(() => {

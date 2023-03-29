@@ -12,7 +12,7 @@ import Facebook from "../assests/Facebook.svg";
 import Twitter from "../assests/Twiter.svg";
 import Linkedin from "../assests/Linkedin.svg";
 import Modal from "./Modal";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const JobDetail = ({ filteredApplicants, showSnackbar }) => {
   console.log(filteredApplicants);
@@ -20,7 +20,7 @@ const JobDetail = ({ filteredApplicants, showSnackbar }) => {
   const [modal, setModal] = useState(false);
   const [disabled, setdisabled] = useState(false);
 
-  let navigate = useNavigate();
+  const history = useHistory();
   const date = new Date();
   const formattedDate = `${date.getDate().toString().padStart(2, "0")}-${(
     date.getMonth() + 1
@@ -49,7 +49,7 @@ const JobDetail = ({ filteredApplicants, showSnackbar }) => {
     document.body.classList.remove("active-modal");
   }
   const nextPage = () => {
-    navigate("/");
+    history.push("/");
   };
   return (
     <div className="jobdetail">
