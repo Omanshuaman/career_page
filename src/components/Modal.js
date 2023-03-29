@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import axios from "axios";
 import AWS from "aws-sdk";
-const Modal = ({ modal, setModal, openModal, jobId }) => {
+const Modal = ({ modal, setModal, openModal, jobId, showSnackbar }) => {
   AWS.config.update({
     accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
@@ -66,6 +66,7 @@ const Modal = ({ modal, setModal, openModal, jobId }) => {
         newApplicant
       );
       setModal(false); // Close the modal after submitting the form
+      showSnackbar();
     } catch (err) {
       console.log(err);
     } finally {

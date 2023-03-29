@@ -2,8 +2,26 @@ import React, { useEffect, useState } from "react";
 
 import Modal from "./Modal";
 
-const Banner = ({ filteredApplicants }) => {
+const Banner = ({ filteredApplicants, showSnackbar }) => {
   const [modal, setModal] = useState(false);
+  const [disabled, setdisabled] = useState(false);
+  const date = new Date();
+  const formattedDate = `${date.getDate().toString().padStart(2, "0")}-${(
+    date.getMonth() + 1
+  )
+    .toString()
+    .padStart(2, "0")}-${date.getFullYear().toString()}`;
+  const date1 = formattedDate;
+  const date2 = filteredApplicants.deadline;
+
+  const formattedDate1 = date1.split("-").reverse().join("-");
+  const formattedDate2 = date2.split("-").reverse().join("-");
+  useEffect(() => {
+    if (new Date(formattedDate1) > new Date(formattedDate2)) {
+      setdisabled(true);
+      console.log("first");
+    }
+  }, []);
   const openModal = () => {
     setModal(!modal);
   };
@@ -15,12 +33,16 @@ const Banner = ({ filteredApplicants }) => {
   return (
     <div className="banner">
       <div className="banner-column">
-        <div className="banner-text1">{filteredApplicants[0].role}</div>
+        <div className="banner-text1">{filteredApplicants.role}</div>
         <div className="banner-text2">
-          Job Type: {filteredApplicants[0].job_type} | No of Vacancies :
-          {filteredApplicants[0].number_of_vacancy}
+          Job Type: {filteredApplicants.job_type} | No of Vacancies :
+          {filteredApplicants.number_of_vacancy}
         </div>
-        <button className="apply-button" onClick={() => openModal()}>
+        <button
+          className="apply-button"
+          onClick={() => openModal()}
+          disabled={disabled}
+        >
           Apply Now
         </button>
       </div>
@@ -30,7 +52,8 @@ const Banner = ({ filteredApplicants }) => {
           modal={modal}
           setModal={setModal}
           openModal={openModal}
-          jobId={filteredApplicants[0].id}
+          jobId={filteredApplicants.id}
+          showSnackbar={showSnackbar}
         />
       )}
     </div>

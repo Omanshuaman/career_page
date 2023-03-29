@@ -1,16 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import Banner from "../components/Banner";
 import JobDetail from "../components/JobDetail";
 import { useLocation } from "react-router-dom";
 
 const JobsDesc = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  const showSnackbar = () => {
+    setIsVisible(true);
+    setTimeout(() => setIsVisible(false), 3000);
+  };
   const location = useLocation();
-  const { filteredApplicants } = location.state;
+  const filteredApplicants = location.state.jobdesc;
   console.log(filteredApplicants);
   return (
     <div>
-      <Banner filteredApplicants={filteredApplicants} />
-      <JobDetail filteredApplicants={filteredApplicants} />
+      <Banner
+        filteredApplicants={filteredApplicants}
+        showSnackbar={showSnackbar}
+      />
+      <JobDetail
+        filteredApplicants={filteredApplicants}
+        showSnackbar={showSnackbar}
+      />
     </div>
   );
 };

@@ -6,16 +6,22 @@ const Openings = () => {
   const [activeTab, setActiveTab] = useState("ENGINEERING");
   const [applicants, setApplicants] = useState([]);
   const [filteredApplicants, setFilteredApplicants] = useState([]);
+  const [filteredApplicants1, setFilteredApplicants1] = useState([]);
+  const [filteredApplicants2, setFilteredApplicants2] = useState([]);
+  const [filteredApplicants3, setFilteredApplicants3] = useState([]);
+  const [filteredApplicants4, setFilteredApplicants4] = useState([]);
+  const [filteredApplicants5, setFilteredApplicants5] = useState([]);
+
   const [isLoading, setIsLoading] = useState(false);
 
   let navigate = useNavigate();
   const openCity = (cityName) => {
     setActiveTab(cityName);
   };
-  const nextPage = (id) => {
-    navigate(`/${id}`, { state: { filteredApplicants } });
+  const nextPage = (id, jobdesc) => {
+    navigate(`/${id}`, { state: { jobdesc } });
+    console.log(jobdesc);
   };
-
   useEffect(() => {
     const fetchJobPostings = async () => {
       setIsLoading(true);
@@ -26,10 +32,31 @@ const Openings = () => {
         const data = await response.json();
         console.log(data);
         setApplicants(data.applicants);
+        const filtered1 = data.applicants.filter(
+          (applicant) => applicant.department === "HT & Admin"
+        );
+        setFilteredApplicants1(filtered1);
         const filtered = data.applicants.filter(
-          (applicant) => applicant.department === "engineering"
+          (applicant) => applicant.department === "Engineering"
         );
         setFilteredApplicants(filtered);
+
+        const filtered2 = data.applicants.filter(
+          (applicant) => applicant.department === "Support"
+        );
+        setFilteredApplicants2(filtered2);
+        const filtered5 = data.applicants.filter(
+          (applicant) => applicant.department === "Sales"
+        );
+        setFilteredApplicants5(filtered5);
+        const filtered4 = data.applicants.filter(
+          (applicant) => applicant.department === "Design"
+        );
+        setFilteredApplicants4(filtered4);
+        const filtered3 = data.applicants.filter(
+          (applicant) => applicant.department === "Digital Marketing"
+        );
+        setFilteredApplicants3(filtered3);
       } catch (error) {
         console.error(error);
       } finally {
@@ -60,7 +87,7 @@ const Openings = () => {
             }
             onClick={() => openCity("HT & ADMIN")}
           >
-            HT & ADMIN
+            HT & ADMIN<sup>{filteredApplicants1.length}</sup>
           </button>
           <button
             className={
@@ -74,13 +101,19 @@ const Openings = () => {
             className={activeTab === "SUPPORT" ? "tablinks active" : "tablinks"}
             onClick={() => openCity("SUPPORT")}
           >
-            SUPPORT
+            SUPPORT<sup>{filteredApplicants2.length}</sup>
+          </button>
+          <button
+            className={activeTab === "SALES" ? "tablinks active" : "tablinks"}
+            onClick={() => openCity("SALES")}
+          >
+            SALES<sup>{filteredApplicants5.length}</sup>
           </button>
           <button
             className={activeTab === "DESIGN" ? "tablinks active" : "tablinks"}
             onClick={() => openCity("DESIGN")}
           >
-            DESIGN
+            DESIGN<sup>{filteredApplicants4.length}</sup>
           </button>
           <button
             className={
@@ -88,7 +121,7 @@ const Openings = () => {
             }
             onClick={() => openCity("DIGITAL MARKETING")}
           >
-            DIGITAL MARKETING
+            DIGITAL MARKETING<sup>{filteredApplicants3.length}</sup>
           </button>
         </div>
         <div
@@ -97,7 +130,33 @@ const Openings = () => {
             activeTab === "HT & ADMIN" ? "tabcontent" : "tabcontent hidden"
           }
         >
-          <h3>ht & admin</h3>
+          {isLoading ? (
+            <div className="loading-text">Loading...</div>
+          ) : (
+            filteredApplicants1.map((applicant) => {
+              return (
+                <div
+                  className="job-container"
+                  onClick={() => nextPage(applicant.id, applicant)}
+                >
+                  <div className="job-name">{applicant.role}</div>
+                  <div className="experience">
+                    <div className="experience-text">Experience</div>
+                    <div className="experience-year">
+                      {applicant.experience}
+                    </div>
+                  </div>
+                  <div className="deadline">
+                    <div className="deadline-text">Deadline</div>
+                    <div className="deadline-year">{applicant.deadline}</div>
+                  </div>
+                  <div className="next-vector">
+                    <img src={Next} alt="Your SVG" className="next-svg" />
+                  </div>
+                </div>
+              );
+            })
+          )}
         </div>
 
         <div
@@ -113,7 +172,7 @@ const Openings = () => {
               return (
                 <div
                   className="job-container"
-                  onClick={() => nextPage(applicant.id)}
+                  onClick={() => nextPage(applicant.id, applicant)}
                 >
                   <div className="job-name">{applicant.role}</div>
                   <div className="experience">
@@ -141,16 +200,99 @@ const Openings = () => {
             activeTab === "SUPPORT" ? "tabcontent" : "tabcontent hidden"
           }
         >
-          <h3>support</h3>
+          {isLoading ? (
+            <div className="loading-text">Loading...</div>
+          ) : (
+            filteredApplicants2.map((applicant) => {
+              return (
+                <div
+                  className="job-container"
+                  onClick={() => nextPage(applicant.id, applicant)}
+                >
+                  <div className="job-name">{applicant.role}</div>
+                  <div className="experience">
+                    <div className="experience-text">Experience</div>
+                    <div className="experience-year">
+                      {applicant.experience}
+                    </div>
+                  </div>
+                  <div className="deadline">
+                    <div className="deadline-text">Deadline</div>
+                    <div className="deadline-year">{applicant.deadline}</div>
+                  </div>
+                  <div className="next-vector">
+                    <img src={Next} alt="Your SVG" className="next-svg" />
+                  </div>
+                </div>
+              );
+            })
+          )}
         </div>
-
+        <div
+          id="SALES"
+          className={activeTab === "SALES" ? "tabcontent" : "tabcontent hidden"}
+        >
+          {isLoading ? (
+            <div className="loading-text">Loading...</div>
+          ) : (
+            filteredApplicants5.map((applicant) => {
+              return (
+                <div
+                  className="job-container"
+                  onClick={() => nextPage(applicant.id, applicant)}
+                >
+                  <div className="job-name">{applicant.role}</div>
+                  <div className="experience">
+                    <div className="experience-text">Experience</div>
+                    <div className="experience-year">
+                      {applicant.experience}
+                    </div>
+                  </div>
+                  <div className="deadline">
+                    <div className="deadline-text">Deadline</div>
+                    <div className="deadline-year">{applicant.deadline}</div>
+                  </div>
+                  <div className="next-vector">
+                    <img src={Next} alt="Your SVG" className="next-svg" />
+                  </div>
+                </div>
+              );
+            })
+          )}
+        </div>
         <div
           id="DESIGN"
           className={
             activeTab === "DESIGN" ? "tabcontent" : "tabcontent hidden"
           }
         >
-          <h3>design</h3>
+          {isLoading ? (
+            <div className="loading-text">Loading...</div>
+          ) : (
+            filteredApplicants4.map((applicant) => {
+              return (
+                <div
+                  className="job-container"
+                  onClick={() => nextPage(applicant.id, applicant)}
+                >
+                  <div className="job-name">{applicant.role}</div>
+                  <div className="experience">
+                    <div className="experience-text">Experience</div>
+                    <div className="experience-year">
+                      {applicant.experience}
+                    </div>
+                  </div>
+                  <div className="deadline">
+                    <div className="deadline-text">Deadline</div>
+                    <div className="deadline-year">{applicant.deadline}</div>
+                  </div>
+                  <div className="next-vector">
+                    <img src={Next} alt="Your SVG" className="next-svg" />
+                  </div>
+                </div>
+              );
+            })
+          )}
         </div>
         <div
           id="DIGITAL MARKETING"
@@ -160,7 +302,33 @@ const Openings = () => {
               : "tabcontent hidden"
           }
         >
-          <h3>digital marketing</h3>
+          {isLoading ? (
+            <div className="loading-text">Loading...</div>
+          ) : (
+            filteredApplicants3.map((applicant) => {
+              return (
+                <div
+                  className="job-container"
+                  onClick={() => nextPage(applicant.id, applicant)}
+                >
+                  <div className="job-name">{applicant.role}</div>
+                  <div className="experience">
+                    <div className="experience-text">Experience</div>
+                    <div className="experience-year">
+                      {applicant.experience}
+                    </div>
+                  </div>
+                  <div className="deadline">
+                    <div className="deadline-text">Deadline</div>
+                    <div className="deadline-year">{applicant.deadline}</div>
+                  </div>
+                  <div className="next-vector">
+                    <img src={Next} alt="Your SVG" className="next-svg" />
+                  </div>
+                </div>
+              );
+            })
+          )}
         </div>
       </div>
     </div>

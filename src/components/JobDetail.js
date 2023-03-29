@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "../assests/Rectangle.svg";
 import Location from "../assests/location.svg";
 import JobType from "../assests/jobType.svg";
@@ -14,12 +14,31 @@ import Linkedin from "../assests/Linkedin.svg";
 import Modal from "./Modal";
 import { useNavigate } from "react-router-dom";
 
-const JobDetail = ({ filteredApplicants }) => {
+const JobDetail = ({ filteredApplicants, showSnackbar }) => {
   console.log(filteredApplicants);
   // Use the filteredApplicants prop here
   const [modal, setModal] = useState(false);
-  let navigate = useNavigate();
+  const [disabled, setdisabled] = useState(false);
 
+  let navigate = useNavigate();
+  const date = new Date();
+  const formattedDate = `${date.getDate().toString().padStart(2, "0")}-${(
+    date.getMonth() + 1
+  )
+    .toString()
+    .padStart(2, "0")}-${date.getFullYear().toString()}`;
+  const date1 = formattedDate;
+  const date2 = filteredApplicants.deadline;
+
+  const formattedDate1 = date1.split("-").reverse().join("-");
+  const formattedDate2 = date2.split("-").reverse().join("-");
+
+  useEffect(() => {
+    if (new Date(formattedDate1) > new Date(formattedDate2)) {
+      setdisabled(true);
+      console.log("first");
+    }
+  }, []);
   const openModal = () => {
     setModal(!modal);
   };
@@ -40,11 +59,11 @@ const JobDetail = ({ filteredApplicants }) => {
         </div>
         <div className="row-detail">
           <div className="job-column-desc">
-            <div className="headline">{filteredApplicants[0].role}</div>
+            <div className="headline">{filteredApplicants.role}</div>
             <div className="headline-small">Who Are We Looking For</div>
             <div className="detail-row">
               <div className="description-small">
-                {filteredApplicants[0].what_we_are_looking_for
+                {filteredApplicants.what_we_are_looking_for
                   .split("*")
                   .map((item) => (
                     <p key={item}>
@@ -57,7 +76,7 @@ const JobDetail = ({ filteredApplicants }) => {
             <div className="headline-small">What You Will Be Doing</div>
             <div className="detail-row">
               <div className="description-small">
-                {filteredApplicants[0].what_you_will_be_doing
+                {filteredApplicants.what_you_will_be_doing
                   .split("*")
                   .map((item) => (
                     <p key={item}>
@@ -72,7 +91,7 @@ const JobDetail = ({ filteredApplicants }) => {
             </div>
             <div className="detail-row">
               <div className="description-small">
-                {filteredApplicants[0].bonus_point.split("*").map((item) => (
+                {filteredApplicants.bonus_point.split("*").map((item) => (
                   <p key={item}>
                     <span className="bullet-icon">&bull;</span> {item.trim()}
                   </p>
@@ -82,17 +101,18 @@ const JobDetail = ({ filteredApplicants }) => {
 
             <div className="headline-small">Educational Requirement</div>
             <div className="description-small">
-              {filteredApplicants[0].bonus_point.split("*").map((item) => (
-                <p key={item}>
-                  <span className="bullet-icon">&bull;</span>{" "}
-                  {"B.tech , M.tech"}
-                </p>
-              ))}
+              {filteredApplicants.education_requirement
+                .split("*")
+                .map((item) => (
+                  <p key={item}>
+                    <span className="bullet-icon">&bull;</span> {item.trim()}
+                  </p>
+                ))}
             </div>
             <div className="headline-small">Salary</div>
             <div className="detail-row">
               <div className="description-small">
-                {filteredApplicants[0].salary.split("*").map((item) => (
+                {filteredApplicants.salary.split("*").map((item) => (
                   <p key={item}>
                     <span className="bullet-icon">&bull;</span> {item.trim()}
                   </p>
@@ -103,7 +123,7 @@ const JobDetail = ({ filteredApplicants }) => {
             <div className="headline-small">Working Days</div>
             <div className="detail-row">
               <div className="description-small">
-                {filteredApplicants[0].working_days.split("*").map((item) => (
+                {filteredApplicants.working_days.split("*").map((item) => (
                   <p key={item}>
                     <span className="bullet-icon">&bull;</span> {item.trim()}
                   </p>
@@ -114,7 +134,7 @@ const JobDetail = ({ filteredApplicants }) => {
             <div className="headline-small">Perks & Benefits You’ll Get </div>
             <div className="detail-row">
               <div className="description-small">
-                {filteredApplicants[0].working_days.split("*").map((item) => (
+                {filteredApplicants.working_days.split("*").map((item) => (
                   <p key={item}>
                     <span className="bullet-icon">&bull;</span>{" "}
                     {"Health insurance, Informal dress code"}
@@ -125,7 +145,11 @@ const JobDetail = ({ filteredApplicants }) => {
           </div>
           <div className="side-apply">
             <div className="apply-detail">
-              <button className="apply-button" onClick={() => openModal()}>
+              <button
+                className="apply-button"
+                onClick={() => openModal()}
+                disabled={disabled}
+              >
                 Apply Now
               </button>
               <div className="job-summary">
@@ -141,7 +165,7 @@ const JobDetail = ({ filteredApplicants }) => {
                   <div className="location-text">
                     <div className="location-blur">Location</div>
                     <div className="location-text">
-                      {filteredApplicants[0].location}
+                      {filteredApplicants.location}
                     </div>
                   </div>
                 </div>
@@ -158,7 +182,7 @@ const JobDetail = ({ filteredApplicants }) => {
                   <div className="location-text">
                     <div className="location-blur">Job Type</div>
                     <div className="location-text">
-                      {filteredApplicants[0].job_type}
+                      {filteredApplicants.job_type}
                     </div>
                   </div>
                 </div>
@@ -175,7 +199,7 @@ const JobDetail = ({ filteredApplicants }) => {
                   <div className="location-text">
                     <div className="location-blur">Date posted</div>
                     <div className="location-text">
-                      {filteredApplicants[0].job_post_date}
+                      {filteredApplicants.job_post_date}
                     </div>
                   </div>
                 </div>
@@ -192,7 +216,7 @@ const JobDetail = ({ filteredApplicants }) => {
                   <div className="location-text">
                     <div className="location-blur">Experience</div>
                     <div className="location-text">
-                      {filteredApplicants[0].experience}
+                      {filteredApplicants.experience}
                     </div>
                   </div>
                 </div>
@@ -209,7 +233,7 @@ const JobDetail = ({ filteredApplicants }) => {
                   <div className="location-text">
                     <div className="location-blur">Working Hours</div>
                     <div className="location-text">
-                      {filteredApplicants[0].working_hour}
+                      {filteredApplicants.working_hour}
                     </div>
                   </div>
                 </div>
@@ -226,7 +250,7 @@ const JobDetail = ({ filteredApplicants }) => {
                   <div className="location-text">
                     <div className="location-blur">Working Days</div>
                     <div className="location-text">
-                      {filteredApplicants[0].working_days}
+                      {filteredApplicants.working_days}
                     </div>
                   </div>
                 </div>
@@ -243,7 +267,7 @@ const JobDetail = ({ filteredApplicants }) => {
                   <div className="location-text">
                     <div className="location-blur">Vacancy</div>
                     <div className="location-text">
-                      {filteredApplicants[0].number_of_vacancy}
+                      {filteredApplicants.number_of_vacancy}
                     </div>
                   </div>
                 </div>
@@ -269,7 +293,8 @@ const JobDetail = ({ filteredApplicants }) => {
           modal={modal}
           setModal={setModal}
           openModal={openModal}
-          jobId={filteredApplicants[0].id}
+          jobId={filteredApplicants.id}
+          showSnackbar={showSnackbar}
         />
       )}
     </div>
