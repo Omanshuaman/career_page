@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 
 const Openings = () => {
-  const [activeTab, setActiveTab] = useState("ENGINEERING");
+  const [activeTab, setActiveTab] = useState("Sales");
   const [applicants, setApplicants] = useState([]);
   const [filteredApplicants, setFilteredApplicants] = useState([]);
   const [filteredApplicants1, setFilteredApplicants1] = useState([]);
@@ -11,6 +11,9 @@ const Openings = () => {
   const [filteredApplicants3, setFilteredApplicants3] = useState([]);
   const [filteredApplicants4, setFilteredApplicants4] = useState([]);
   const [filteredApplicants5, setFilteredApplicants5] = useState([]);
+  const [filteredApplicants6, setFilteredApplicants6] = useState([]);
+
+  const [filteredApplicants7, setFilteredApplicants7] = useState([]);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -33,16 +36,16 @@ const Openings = () => {
         console.log(data);
         setApplicants(data.applicants);
         const filtered1 = data.applicants.filter(
-          (applicant) => applicant.department === "HT & Admin"
+          (applicant) => applicant.department === "Technology & IT"
         );
         setFilteredApplicants1(filtered1);
         const filtered = data.applicants.filter(
-          (applicant) => applicant.department === "Engineering"
+          (applicant) => applicant.department === "Operations"
         );
         setFilteredApplicants(filtered);
 
         const filtered2 = data.applicants.filter(
-          (applicant) => applicant.department === "Support"
+          (applicant) => applicant.department === "Product Marketing"
         );
         setFilteredApplicants2(filtered2);
         const filtered5 = data.applicants.filter(
@@ -50,13 +53,21 @@ const Openings = () => {
         );
         setFilteredApplicants5(filtered5);
         const filtered4 = data.applicants.filter(
-          (applicant) => applicant.department === "Design"
+          (applicant) => applicant.department === "Finance"
         );
         setFilteredApplicants4(filtered4);
         const filtered3 = data.applicants.filter(
-          (applicant) => applicant.department === "Digital Marketing"
+          (applicant) => applicant.department === "Legal"
         );
         setFilteredApplicants3(filtered3);
+        const filtered6 = data.applicants.filter(
+          (applicant) => applicant.department === "HR & Admin"
+        );
+        setFilteredApplicants6(filtered6);
+        const filtered7 = data.applicants.filter(
+          (applicant) => applicant.department === "Customer Support"
+        );
+        setFilteredApplicants7(filtered7);
       } catch (error) {
         console.error(error);
       } finally {
@@ -74,7 +85,7 @@ const Openings = () => {
         <div className="career-openings">Career Openings</div>
         <div className="career-description">
           We’re always looking for creative, talented self-starters to join the
-          JMC family. Check out our open roles below and fill out an
+          Arnxt family. Check out our open roles below and fill out an
           application.
         </div>
       </div>
@@ -83,51 +94,67 @@ const Openings = () => {
         <div className="tab">
           <button
             className={
-              activeTab === "HT & ADMIN" ? "tablinks active" : "tablinks"
+              activeTab === "Technology & IT" ? "tablinks active" : "tablinks"
             }
-            onClick={() => openCity("HT & ADMIN")}
+            onClick={() => openCity("Technology & IT")}
           >
-            HT & ADMIN<sup>{filteredApplicants1.length}</sup>
+            Technology & IT<sup>{filteredApplicants1.length}</sup>
           </button>
           <button
             className={
-              activeTab === "ENGINEERING" ? "tablinks active" : "tablinks"
+              activeTab === "Operations" ? "tablinks active" : "tablinks"
             }
-            onClick={() => openCity("ENGINEERING")}
+            onClick={() => openCity("Operations")}
           >
-            ENGINEERING<sup>{filteredApplicants.length}</sup>
-          </button>
-          <button
-            className={activeTab === "SUPPORT" ? "tablinks active" : "tablinks"}
-            onClick={() => openCity("SUPPORT")}
-          >
-            SUPPORT<sup>{filteredApplicants2.length}</sup>
-          </button>
-          <button
-            className={activeTab === "SALES" ? "tablinks active" : "tablinks"}
-            onClick={() => openCity("SALES")}
-          >
-            SALES<sup>{filteredApplicants5.length}</sup>
-          </button>
-          <button
-            className={activeTab === "DESIGN" ? "tablinks active" : "tablinks"}
-            onClick={() => openCity("DESIGN")}
-          >
-            DESIGN<sup>{filteredApplicants4.length}</sup>
+            Operations<sup>{filteredApplicants.length}</sup>
           </button>
           <button
             className={
-              activeTab === "DIGITAL MARKETING" ? "tablinks active" : "tablinks"
+              activeTab === "Product Marketing" ? "tablinks active" : "tablinks"
             }
-            onClick={() => openCity("DIGITAL MARKETING")}
+            onClick={() => openCity("Product Marketing")}
           >
-            DIGITAL MARKETING<sup>{filteredApplicants3.length}</sup>
+            Product Marketing<sup>{filteredApplicants2.length}</sup>
+          </button>
+          <button
+            className={activeTab === "Sales" ? "tablinks active" : "tablinks"}
+            onClick={() => openCity("Sales")}
+          >
+            Sales<sup>{filteredApplicants5.length}</sup>
+          </button>
+          <button
+            className={activeTab === "Finance" ? "tablinks active" : "tablinks"}
+            onClick={() => openCity("Finance")}
+          >
+            Finance<sup>{filteredApplicants4.length}</sup>
+          </button>
+          <button
+            className={activeTab === "Legal" ? "tablinks active" : "tablinks"}
+            onClick={() => openCity("Legal")}
+          >
+            Legal<sup>{filteredApplicants3.length}</sup>
+          </button>
+          <button
+            className={
+              activeTab === "HR & Admin" ? "tablinks active" : "tablinks"
+            }
+            onClick={() => openCity("HR & Admin")}
+          >
+            HR & Admin<sup>{filteredApplicants6.length}</sup>
+          </button>
+          <button
+            className={
+              activeTab === "Customer Support" ? "tablinks active" : "tablinks"
+            }
+            onClick={() => openCity("Customer Support")}
+          >
+            Customer Support<sup>{filteredApplicants6.length}</sup>
           </button>
         </div>
         <div
-          id="HT & ADMIN"
+          id="Technology & IT"
           className={
-            activeTab === "HT & ADMIN" ? "tabcontent" : "tabcontent hidden"
+            activeTab === "Technology & IT" ? "tabcontent" : "tabcontent hidden"
           }
         >
           {isLoading ? (
@@ -160,9 +187,9 @@ const Openings = () => {
         </div>
 
         <div
-          id="ENGINEERING"
+          id="Operations"
           className={
-            activeTab === "ENGINEERING" ? "tabcontent" : "tabcontent hidden"
+            activeTab === "Operations" ? "tabcontent" : "tabcontent hidden"
           }
         >
           {isLoading ? (
@@ -195,9 +222,11 @@ const Openings = () => {
         </div>
 
         <div
-          id="SUPPORT"
+          id="Product Marketing"
           className={
-            activeTab === "SUPPORT" ? "tabcontent" : "tabcontent hidden"
+            activeTab === "Product Marketing"
+              ? "tabcontent"
+              : "tabcontent hidden"
           }
         >
           {isLoading ? (
@@ -229,8 +258,8 @@ const Openings = () => {
           )}
         </div>
         <div
-          id="SALES"
-          className={activeTab === "SALES" ? "tabcontent" : "tabcontent hidden"}
+          id="Sales"
+          className={activeTab === "Sales" ? "tabcontent" : "tabcontent hidden"}
         >
           {isLoading ? (
             <div className="loading-text">Loading...</div>
@@ -261,9 +290,9 @@ const Openings = () => {
           )}
         </div>
         <div
-          id="DESIGN"
+          id="Finance"
           className={
-            activeTab === "DESIGN" ? "tabcontent" : "tabcontent hidden"
+            activeTab === "Finance" ? "tabcontent" : "tabcontent hidden"
           }
         >
           {isLoading ? (
@@ -295,9 +324,75 @@ const Openings = () => {
           )}
         </div>
         <div
-          id="DIGITAL MARKETING"
+          id="Legal"
+          className={activeTab === "Legal" ? "tabcontent" : "tabcontent hidden"}
+        >
+          {isLoading ? (
+            <div className="loading-text">Loading...</div>
+          ) : (
+            filteredApplicants3.map((applicant) => {
+              return (
+                <div
+                  className="job-container"
+                  onClick={() => nextPage(applicant.id, applicant)}
+                >
+                  <div className="job-name">{applicant.role}</div>
+                  <div className="experience">
+                    <div className="experience-text">Experience</div>
+                    <div className="experience-year">
+                      {applicant.experience}
+                    </div>
+                  </div>
+                  <div className="deadline">
+                    <div className="deadline-text">Deadline</div>
+                    <div className="deadline-year">{applicant.deadline}</div>
+                  </div>
+                  <div className="next-vector">
+                    <img src={Next} alt="Your SVG" className="next-svg" />
+                  </div>
+                </div>
+              );
+            })
+          )}
+        </div>
+        <div
+          id="HR & Admin"
           className={
-            activeTab === "DIGITAL MARKETING"
+            activeTab === "HR & Admin" ? "tabcontent" : "tabcontent hidden"
+          }
+        >
+          {isLoading ? (
+            <div className="loading-text">Loading...</div>
+          ) : (
+            filteredApplicants6.map((applicant) => {
+              return (
+                <div
+                  className="job-container"
+                  onClick={() => nextPage(applicant.id, applicant)}
+                >
+                  <div className="job-name">{applicant.role}</div>
+                  <div className="experience">
+                    <div className="experience-text">Experience</div>
+                    <div className="experience-year">
+                      {applicant.experience}
+                    </div>
+                  </div>
+                  <div className="deadline">
+                    <div className="deadline-text">Deadline</div>
+                    <div className="deadline-year">{applicant.deadline}</div>
+                  </div>
+                  <div className="next-vector">
+                    <img src={Next} alt="Your SVG" className="next-svg" />
+                  </div>
+                </div>
+              );
+            })
+          )}
+        </div>
+        <div
+          id="Customer Support"
+          className={
+            activeTab === "Customer Support"
               ? "tabcontent"
               : "tabcontent hidden"
           }
@@ -305,7 +400,7 @@ const Openings = () => {
           {isLoading ? (
             <div className="loading-text">Loading...</div>
           ) : (
-            filteredApplicants3.map((applicant) => {
+            filteredApplicants7.map((applicant) => {
               return (
                 <div
                   className="job-container"
