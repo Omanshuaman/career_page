@@ -45,7 +45,7 @@ const JobDetail = ({ filteredApplicants }) => {
             <div className="detail-row">
               <div className="description-small">
                 {filteredApplicants[0].what_we_are_looking_for
-                  .split(".")
+                  .split("*")
                   .map((item) => (
                     <p key={item}>
                       <span className="bullet-icon">&bull;</span> {item.trim()}
@@ -58,7 +58,7 @@ const JobDetail = ({ filteredApplicants }) => {
             <div className="detail-row">
               <div className="description-small">
                 {filteredApplicants[0].what_you_will_be_doing
-                  .split(".")
+                  .split("*")
                   .map((item) => (
                     <p key={item}>
                       <span className="bullet-icon">&bull;</span> {item.trim()}
@@ -72,7 +72,7 @@ const JobDetail = ({ filteredApplicants }) => {
             </div>
             <div className="detail-row">
               <div className="description-small">
-                {filteredApplicants[0].bonus_point.split(".").map((item) => (
+                {filteredApplicants[0].bonus_point.split("*").map((item) => (
                   <p key={item}>
                     <span className="bullet-icon">&bull;</span> {item.trim()}
                   </p>
@@ -82,7 +82,7 @@ const JobDetail = ({ filteredApplicants }) => {
 
             <div className="headline-small">Educational Requirement</div>
             <div className="description-small">
-              {filteredApplicants[0].bonus_point.split(".").map((item) => (
+              {filteredApplicants[0].bonus_point.split("*").map((item) => (
                 <p key={item}>
                   <span className="bullet-icon">&bull;</span>{" "}
                   {"B.tech , M.tech"}
@@ -92,7 +92,7 @@ const JobDetail = ({ filteredApplicants }) => {
             <div className="headline-small">Salary</div>
             <div className="detail-row">
               <div className="description-small">
-                {filteredApplicants[0].salary.split(".").map((item) => (
+                {filteredApplicants[0].salary.split("*").map((item) => (
                   <p key={item}>
                     <span className="bullet-icon">&bull;</span> {item.trim()}
                   </p>
@@ -103,7 +103,7 @@ const JobDetail = ({ filteredApplicants }) => {
             <div className="headline-small">Working Days</div>
             <div className="detail-row">
               <div className="description-small">
-                {filteredApplicants[0].working_days.split(".").map((item) => (
+                {filteredApplicants[0].working_days.split("*").map((item) => (
                   <p key={item}>
                     <span className="bullet-icon">&bull;</span> {item.trim()}
                   </p>
@@ -114,7 +114,7 @@ const JobDetail = ({ filteredApplicants }) => {
             <div className="headline-small">Perks & Benefits You’ll Get </div>
             <div className="detail-row">
               <div className="description-small">
-                {filteredApplicants[0].working_days.split(".").map((item) => (
+                {filteredApplicants[0].working_days.split("*").map((item) => (
                   <p key={item}>
                     <span className="bullet-icon">&bull;</span>{" "}
                     {"Health insurance, Informal dress code"}
@@ -265,7 +265,12 @@ const JobDetail = ({ filteredApplicants }) => {
         </div>
       </div>
       {modal && (
-        <Modal modal={modal} setModal={setModal} openModal={openModal} />
+        <Modal
+          modal={modal}
+          setModal={setModal}
+          openModal={openModal}
+          jobId={filteredApplicants[0].id}
+        />
       )}
     </div>
   );

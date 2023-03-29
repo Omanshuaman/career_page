@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+
 import axios from "axios";
 import AWS from "aws-sdk";
-const Modal = ({ modal, setModal, openModal }) => {
+const Modal = ({ modal, setModal, openModal, jobId }) => {
   AWS.config.update({
     accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
@@ -9,13 +10,12 @@ const Modal = ({ modal, setModal, openModal }) => {
     signatureVersion: "v4",
   });
   const s3 = new AWS.S3();
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [contact, setContact] = useState("");
   const [resume, setResume] = useState(null);
-  const [errorMessage, setErrorMessage] = useState("");
   const [contactError, setContactError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const now = new Date();
   const appliedDate = now.toISOString();
@@ -43,7 +43,7 @@ const Modal = ({ modal, setModal, openModal }) => {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    setIsLoading(true);
     const params = {
       Bucket: process.env.REACT_APP_S3_BUCKET_NAME,
       Key: `${Date.now()}-${resume.name}`,
@@ -58,6 +58,7 @@ const Modal = ({ modal, setModal, openModal }) => {
         contactNumber: contact,
         resumeUrl: data.Location,
         applied_date: appliedDate,
+        job_id: jobId,
       };
 
       const res = await axios.post(
@@ -67,7 +68,8 @@ const Modal = ({ modal, setModal, openModal }) => {
       setModal(false); // Close the modal after submitting the form
     } catch (err) {
       console.log(err);
-      setErrorMessage("An error occurred while submitting your application.");
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -98,8 +100,6 @@ const Modal = ({ modal, setModal, openModal }) => {
             type="number"
             className="name-input"
             required
-            min="5"
-            max="10"
             onChange={handleContactChange}
           />
 
@@ -113,11 +113,10 @@ const Modal = ({ modal, setModal, openModal }) => {
             required
             onChange={handleResumeChange}
           />
-          <div className="action">
-            <button className="action-button" type="submit">
-              Upload
-            </button>
-          </div>
+          {isLoading && <div className="loader"></div>}
+          <button className="action-button" type="submit" disabled={isLoading}>
+            {isLoading ? "Uploading..." : "Upload"}
+          </button>
         </form>
         <button className="close-modal" onClick={openModal}>
           X

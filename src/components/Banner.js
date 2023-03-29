@@ -17,7 +17,7 @@ const Banner = ({ filteredApplicants }) => {
       <div className="banner-column">
         <div className="banner-text1">{filteredApplicants[0].role}</div>
         <div className="banner-text2">
-          Job Type: {filteredApplicants[0].job_type} | No of Vacancies:
+          Job Type: {filteredApplicants[0].job_type} | No of Vacancies :
           {filteredApplicants[0].number_of_vacancy}
         </div>
         <button className="apply-button" onClick={() => openModal()}>
@@ -26,7 +26,12 @@ const Banner = ({ filteredApplicants }) => {
       </div>
 
       {modal && (
-        <Modal modal={modal} setModal={setModal} openModal={openModal} />
+        <Modal
+          modal={modal}
+          setModal={setModal}
+          openModal={openModal}
+          jobId={filteredApplicants[0].id}
+        />
       )}
     </div>
   );

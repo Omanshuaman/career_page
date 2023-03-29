@@ -6,9 +6,9 @@ const Openings = () => {
   const [activeTab, setActiveTab] = useState("ENGINEERING");
   const [applicants, setApplicants] = useState([]);
   const [filteredApplicants, setFilteredApplicants] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   let navigate = useNavigate();
-
   const openCity = (cityName) => {
     setActiveTab(cityName);
   };
@@ -17,20 +17,25 @@ const Openings = () => {
   };
 
   useEffect(() => {
-    async function fetchJobPostings() {
-      const response = await fetch(
-        "https://nt4k05fl8k.execute-api.us-east-1.amazonaws.com/prod/jobposts"
-      );
-      const data = await response.json();
-      console.log(data);
-
-      setApplicants(data.applicants);
-
-      const filtered = data.applicants.filter(
-        (applicant) => applicant.department === "engineering"
-      );
-      setFilteredApplicants(filtered);
-    }
+    const fetchJobPostings = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch(
+          "https://nt4k05fl8k.execute-api.us-east-1.amazonaws.com/prod/jobposts"
+        );
+        const data = await response.json();
+        console.log(data);
+        setApplicants(data.applicants);
+        const filtered = data.applicants.filter(
+          (applicant) => applicant.department === "engineering"
+        );
+        setFilteredApplicants(filtered);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
     fetchJobPostings();
   }, []);
@@ -63,7 +68,7 @@ const Openings = () => {
             }
             onClick={() => openCity("ENGINEERING")}
           >
-            ENGINEERING
+            ENGINEERING<sup>{filteredApplicants.length}</sup>
           </button>
           <button
             className={activeTab === "SUPPORT" ? "tablinks active" : "tablinks"}
@@ -101,27 +106,33 @@ const Openings = () => {
             activeTab === "ENGINEERING" ? "tabcontent" : "tabcontent hidden"
           }
         >
-          {filteredApplicants.map((applicant) => {
-            return (
-              <div
-                className="job-container"
-                onClick={() => nextPage(applicant.job_id)}
-              >
-                <div className="job-name">{applicant.role}</div>
-                <div className="experience">
-                  <div className="experience-text">Experience</div>
-                  <div className="experience-year">{applicant.experience}</div>
+          {isLoading ? (
+            <div className="loading-text">Loading...</div>
+          ) : (
+            filteredApplicants.map((applicant) => {
+              return (
+                <div
+                  className="job-container"
+                  onClick={() => nextPage(applicant.id)}
+                >
+                  <div className="job-name">{applicant.role}</div>
+                  <div className="experience">
+                    <div className="experience-text">Experience</div>
+                    <div className="experience-year">
+                      {applicant.experience}
+                    </div>
+                  </div>
+                  <div className="deadline">
+                    <div className="deadline-text">Deadline</div>
+                    <div className="deadline-year">{applicant.deadline}</div>
+                  </div>
+                  <div className="next-vector">
+                    <img src={Next} alt="Your SVG" className="next-svg" />
+                  </div>
                 </div>
-                <div className="deadline">
-                  <div className="deadline-text">Deadline</div>
-                  <div className="deadline-year">{applicant.deadline}</div>
-                </div>
-                <div className="next-vector">
-                  <img src={Next} alt="Your SVG" className="next-svg" />
-                </div>
-              </div>
-            );
-          })}
+              );
+            })
+          )}
         </div>
 
         <div
