@@ -4,13 +4,13 @@ import Location from "../assests/location.svg";
 import JobType from "../assests/jobType.svg";
 import DatePosted from "../assests/datePosted.svg";
 import Experience from "../assests/experience.svg";
-import WorkingHours from "../assests/workingHours.svg";
-import WorkingDays from "../assests/workingDays.svg";
 import Vacancy from "../assests/vacancy.svg";
 import Instagram from "../assests/Instagram.svg";
 import Facebook from "../assests/Facebook.svg";
 import Twitter from "../assests/Twiter.svg";
 import Linkedin from "../assests/Linkedin.svg";
+import Id from "../assests/id.svg";
+
 import Modal from "./Modal";
 import { useHistory } from "react-router-dom";
 
@@ -64,7 +64,7 @@ const JobDetail = ({ filteredApplicants, showSnackbar }) => {
   };
 
   const shareOnLinkedin = () => {
-    const articleUrl = encodeURIComponent("https://arnxt.com/");
+    const articleUrl = encodeURIComponent(window.location.href);
     const title = encodeURIComponent("LinkedIn Developer Network");
     const summary = encodeURIComponent("My favorite developer program");
     const source = encodeURIComponent("LinkedIn");
@@ -177,8 +177,21 @@ const JobDetail = ({ filteredApplicants, showSnackbar }) => {
               >
                 Apply Now
               </button>
+
               <div className="job-summary">
                 <div className="job-summarytext">Job Summary</div>
+
+                <div className="job-row">
+                  <div className="vector-location">
+                    <img src={Id} alt="Your SVG" className="location-svg"></img>
+                  </div>
+                  <div className="location-text">
+                    <div className="location-blur">Job Id</div>
+                    <div className="location-text">{filteredApplicants.id}</div>
+                  </div>
+                </div>
+              </div>
+              <div className="job-summary">
                 <div className="job-row">
                   <div className="vector-location">
                     <img
@@ -212,6 +225,7 @@ const JobDetail = ({ filteredApplicants, showSnackbar }) => {
                   </div>
                 </div>
               </div>
+
               <div className="job-summary">
                 <div className="job-row">
                   <div className="vector-location">
@@ -246,40 +260,7 @@ const JobDetail = ({ filteredApplicants, showSnackbar }) => {
                   </div>
                 </div>
               </div>
-              <div className="job-summary">
-                <div className="job-row">
-                  <div className="vector-location">
-                    <img
-                      src={WorkingHours}
-                      alt="Your SVG"
-                      className="location-svg"
-                    ></img>
-                  </div>
-                  <div className="location-text">
-                    <div className="location-blur">Working Hours</div>
-                    <div className="location-text">
-                      {filteredApplicants.working_hour}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="job-summary">
-                <div className="job-row">
-                  <div className="vector-location">
-                    <img
-                      src={WorkingDays}
-                      alt="Your SVG"
-                      className="location-svg"
-                    ></img>
-                  </div>
-                  <div className="location-text">
-                    <div className="location-blur">Working Days</div>
-                    <div className="location-text">
-                      {filteredApplicants.working_days}
-                    </div>
-                  </div>
-                </div>
-              </div>
+
               <div className="job-summary">
                 <div className="job-row">
                   <div className="vector-location">
