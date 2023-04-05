@@ -70,7 +70,7 @@ const JobDetail = ({ filteredApplicants, showSnackbar }) => {
     const source = encodeURIComponent("LinkedIn");
 
     window.open(
-      `https://www.linkedin.com/shareArticle?mini=true&url=${articleUrl}&title=${title}&summary=${summary}&source=${source}`
+      `https://www.linkedin.com/shareArticle?mini=true&url=${window.location.href}&title=${title}&summary=${summary}&source=${source}`
     );
   };
 
