@@ -64,13 +64,13 @@ const JobDetail = ({ filteredApplicants, showSnackbar }) => {
   };
 
   const shareOnLinkedin = () => {
-    const articleUrl = encodeURIComponent(window.location.href);
+    const articleUrl = encodeURIComponent("https://arnxt.com/");
     const title = encodeURIComponent("LinkedIn Developer Network");
     const summary = encodeURIComponent("My favorite developer program");
     const source = encodeURIComponent("LinkedIn");
 
     window.open(
-      `https://www.linkedin.com/shareArticle?mini=true&url=${window.location.href}&title=${title}&summary=${summary}&source=${source}`
+      `https://www.linkedin.com/shareArticle?mini=true&url=${articleUrl}&title=${title}&summary=${summary}&source=${source}`
     );
   };
 
