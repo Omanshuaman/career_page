@@ -134,10 +134,9 @@ const JobDetail = ({ filteredApplicants, showSnackbar }) => {
             <div className="headline-small">Perks & Benefits You’ll Get </div>
             <div className="detail-row">
               <div className="description-small">
-                {filteredApplicants.working_days.split("*").map((item) => (
+                {filteredApplicants.perks_benefits.split("*").map((item) => (
                   <p key={item}>
-                    <span className="bullet-icon">&bull;</span>{" "}
-                    {"Health insurance, Informal dress code"}
+                    <span className="bullet-icon">&bull;</span> {item.trim()}
                   </p>
                 ))}
               </div>

@@ -30,7 +30,7 @@ const Openings = () => {
       setIsLoading(true);
       try {
         const response = await fetch(
-          "https://nt4k05fl8k.execute-api.us-east-1.amazonaws.com/prod/jobposts"
+          "https://0mbq9runce.execute-api.ap-south-1.amazonaws.com/prod/jobposts"
         );
         const data = await response.json();
         console.log(data);

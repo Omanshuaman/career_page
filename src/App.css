@@ -374,7 +374,7 @@ body {
 
 .headline {
   width: 100%;
-  height: 43px;
+  height: auto;
   font-family: "Rubik";
   font-style: normal;
   font-weight: 700;
