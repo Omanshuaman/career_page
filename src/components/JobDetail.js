@@ -146,17 +146,6 @@ const JobDetail = ({ filteredApplicants, showSnackbar }) => {
               </div>
             </div>
 
-            <div className="headline-small">Working Days</div>
-            <div className="detail-row">
-              <div className="description-small">
-                {filteredApplicants.working_days.split("*").map((item) => (
-                  <p key={item}>
-                    <span className="bullet-icon">&bull;</span> {item.trim()}
-                  </p>
-                ))}
-              </div>
-            </div>
-
             <div className="headline-small">Perks & Benefits You’ll Get </div>
             <div className="detail-row">
               <div className="description-small">
@@ -187,7 +176,9 @@ const JobDetail = ({ filteredApplicants, showSnackbar }) => {
                   </div>
                   <div className="location-text">
                     <div className="location-blur">Job Id</div>
-                    <div className="location-text">{filteredApplicants.id}</div>
+                    <div className="location-text">
+                      {filteredApplicants.job_id}
+                    </div>
                   </div>
                 </div>
               </div>
