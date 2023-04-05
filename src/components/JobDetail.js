@@ -51,6 +51,32 @@ const JobDetail = ({ filteredApplicants, showSnackbar }) => {
   const nextPage = () => {
     history.push("/");
   };
+  const shareOnFacebook = () => {
+    window.open(
+      `https://www.facebook.com/sharer.php?u=${window.location.href}`
+    );
+  };
+
+  const shareOnTwitter = () => {
+    window.open(
+      `https://twitter.com/share?url=${window.location.href}&text=Job Posting:`
+    );
+  };
+
+  const shareOnLinkedin = () => {
+    const articleUrl = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent("LinkedIn Developer Network");
+    const summary = encodeURIComponent("My favorite developer program");
+    const source = encodeURIComponent("LinkedIn");
+
+    window.open(
+      `https://www.linkedin.com/shareArticle?mini=true&url=${articleUrl}&title=${title}&summary=${summary}&source=${source}`
+    );
+  };
+
+  const shareOnInstagram = () => {
+    window.open(`https://www.instagram.com/?url=${window.location.href}`);
+  };
   return (
     <div className="jobdetail">
       <div className="jobdetail-main">
@@ -279,10 +305,30 @@ const JobDetail = ({ filteredApplicants, showSnackbar }) => {
             </div>
             <div className="share-this">Share this:</div>
             <div className="share-row">
-              <img src={Facebook} alt="Your SVG" className="social-svg"></img>
-              <img src={Twitter} alt="Your SVG" className="social-svg"></img>
-              <img src={Linkedin} alt="Your SVG" className="social-svg"></img>
-              <img src={Instagram} alt="Your SVG" className="social-svg"></img>
+              <img
+                src={Facebook}
+                alt="Facebook"
+                className="social-svg"
+                onClick={shareOnFacebook}
+              ></img>
+              <img
+                src={Twitter}
+                alt="Twitter"
+                className="social-svg"
+                onClick={shareOnTwitter}
+              ></img>
+              <img
+                src={Linkedin}
+                alt="Linkedin"
+                className="social-svg"
+                onClick={shareOnLinkedin}
+              ></img>
+              <img
+                src={Instagram}
+                alt="Instagram"
+                className="social-svg"
+                onClick={shareOnInstagram}
+              ></img>
             </div>
           </div>
         </div>
