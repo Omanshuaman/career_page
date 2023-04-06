@@ -260,34 +260,21 @@ body {
   height: 21px;
   font-family: "Rubik";
   font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
+  font-weight: 800;
+  font-size: 36px;
   line-height: 21px;
   text-align: center;
   text-transform: uppercase;
   color: #001833;
 }
-.career-openings {
-  width: 298px;
-  height: 43px;
 
-  font-family: "Rubik";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 36px;
-  line-height: 43px;
-
-  text-align: center;
-
-  color: #001833;
-}
 .career-description {
   width: auto;
   height: 60px;
   padding: 2em;
   font-style: normal;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 24px;
   text-align: center;
 
@@ -507,7 +494,9 @@ body {
   .select-dropdown div {
     font-weight: bold;
   }
-
+  .career-description {
+    font-size: 14px;
+  }
   /* For mobile phones: */
   .jobdetail-main {
     width: 100%;

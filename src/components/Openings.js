@@ -81,8 +81,7 @@ const Openings = () => {
   return (
     <div className="openings-container">
       <div className="title">
-        <div className="come-join-us">Come Join Us</div>
-        <div className="career-openings">Career Openings</div>
+        <div className="come-join-us">Join Us</div>
         <div className="career-description">
           We’re always looking for creative, talented self-starters to join the
           Arnxt family. Check out our open roles below and fill out an
