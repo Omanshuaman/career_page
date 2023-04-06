@@ -284,7 +284,7 @@ body {
 .career-description {
   width: auto;
   height: 60px;
-  padding: 1em;
+  padding: 2em;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -495,7 +495,19 @@ body {
   height: 35px;
   cursor: pointer;
 }
+.select-dropdown {
+  display: none;
+}
 @media only screen and (max-width: 620px) {
+  .select-dropdown {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .select-dropdown div {
+    font-weight: bold;
+  }
+
   /* For mobile phones: */
   .jobdetail-main {
     width: 100%;
@@ -512,10 +524,7 @@ body {
     width: 100%;
   }
   .tab {
-    display: flex;
-    min-width: fit-content;
-    height: auto;
-    flex-wrap: wrap;
+    display: none;
   }
   /* Style the buttons inside the tab */
   .tab button {

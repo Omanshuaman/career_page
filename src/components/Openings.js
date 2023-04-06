@@ -151,6 +151,23 @@ const Openings = () => {
             Customer Support<sup>{filteredApplicants6.length}</sup>
           </button>
         </div>
+        <div className="select-dropdown">
+          <div>Search By Department:</div>
+          <select
+            value={activeTab}
+            onChange={(e) => setActiveTab(e.target.value)}
+          >
+            <option value="Technology & IT">Technology & IT</option>
+            <option value="Operations">Operations</option>
+            <option value="Product Marketing">Product Marketing</option>
+            <option value="Sales">Sales</option>
+            <option value="Finance">Finance</option>
+            <option value="Legal">Legal</option>
+            <option value="HR & Admin">HR & Admin</option>
+            <option value="Customer Support">Customer Support</option>
+          </select>
+        </div>
+
         <div
           id="Technology & IT"
           className={
