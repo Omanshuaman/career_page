@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import Modal from "./Modal";
-
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
 const Banner = ({ filteredApplicants, showSnackbar }) => {
   const [modal, setModal] = useState(false);
   const [disabled, setdisabled] = useState(false);
@@ -38,24 +39,27 @@ const Banner = ({ filteredApplicants, showSnackbar }) => {
           Job Type: {filteredApplicants.job_type} | No of Vacancies :
           {filteredApplicants.number_of_vacancy}
         </div>
-        <button
-          className="apply-button"
-          onClick={() => openModal()}
-          disabled={disabled}
+        <Popup
+          trigger={
+            <button className="apply-button" disabled={disabled}>
+              Apply Now
+            </button>
+          }
         >
-          Apply Now
-        </button>
+          {(close) => (
+            <div>
+              <Modal
+                modal={modal}
+                setModal={setModal}
+                openModal={openModal}
+                close={close}
+                jobId={filteredApplicants.id}
+                showSnackbar={showSnackbar}
+              />
+            </div>
+          )}
+        </Popup>
       </div>
-
-      {modal && (
-        <Modal
-          modal={modal}
-          setModal={setModal}
-          openModal={openModal}
-          jobId={filteredApplicants.id}
-          showSnackbar={showSnackbar}
-        />
-      )}
     </div>
   );
 };

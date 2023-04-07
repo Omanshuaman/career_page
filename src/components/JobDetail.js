@@ -10,7 +10,8 @@ import Facebook from "../assests/Facebook.svg";
 import Twitter from "../assests/Twiter.svg";
 import Linkedin from "../assests/Linkedin.svg";
 import Id from "../assests/id.svg";
-
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
 import Modal from "./Modal";
 import { useHistory } from "react-router-dom";
 
@@ -36,7 +37,6 @@ const JobDetail = ({ filteredApplicants, showSnackbar }) => {
   useEffect(() => {
     if (new Date(formattedDate1) > new Date(formattedDate2)) {
       setdisabled(true);
-      console.log("first");
     }
   }, []);
   const openModal = () => {
@@ -159,13 +159,26 @@ const JobDetail = ({ filteredApplicants, showSnackbar }) => {
           </div>
           <div className="side-apply">
             <div className="apply-detail">
-              <button
-                className="apply-button"
-                onClick={() => openModal()}
-                disabled={disabled}
+              <Popup
+                trigger={
+                  <button className="apply-button" disabled={disabled}>
+                    Apply Now
+                  </button>
+                }
               >
-                Apply Now
-              </button>
+                {(close) => (
+                  <div>
+                    <Modal
+                      modal={modal}
+                      setModal={setModal}
+                      openModal={openModal}
+                      close={close}
+                      jobId={filteredApplicants.id}
+                      showSnackbar={showSnackbar}
+                    />
+                  </div>
+                )}
+              </Popup>
 
               <div className="job-summary">
                 <div className="job-summarytext">Job Summary</div>
@@ -305,15 +318,6 @@ const JobDetail = ({ filteredApplicants, showSnackbar }) => {
           </div>
         </div>
       </div>
-      {modal && (
-        <Modal
-          modal={modal}
-          setModal={setModal}
-          openModal={openModal}
-          jobId={filteredApplicants.id}
-          showSnackbar={showSnackbar}
-        />
-      )}
     </div>
   );
 };

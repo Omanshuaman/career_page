@@ -2,7 +2,9 @@ import React, { useState } from "react";
 
 import axios from "axios";
 import AWS from "aws-sdk";
-const Modal = ({ modal, setModal, openModal, jobId, showSnackbar }) => {
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
+const Modal = ({ modal, setModal, openModal, close, jobId, showSnackbar }) => {
   AWS.config.update({
     accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
@@ -65,7 +67,7 @@ const Modal = ({ modal, setModal, openModal, jobId, showSnackbar }) => {
         "https://3pg8ch1ir2.execute-api.us-east-1.amazonaws.com/prod/applicant",
         newApplicant
       );
-      setModal(false); // Close the modal after submitting the form
+      close();
       showSnackbar();
     } catch (err) {
       console.log(err);
@@ -119,7 +121,7 @@ const Modal = ({ modal, setModal, openModal, jobId, showSnackbar }) => {
             {isLoading ? "Uploading..." : "Upload"}
           </button>
         </form>
-        <button className="close-modal" onClick={openModal}>
+        <button className="close-modal" onClick={() => close()}>
           X
         </button>
       </div>

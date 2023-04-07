@@ -14,16 +14,19 @@ const JobsDesc = () => {
   const filteredApplicants = location.state.state.jobdesc;
   console.log(filteredApplicants);
   return (
-    <div>
-      <Banner
-        filteredApplicants={filteredApplicants}
-        showSnackbar={showSnackbar}
-      />
-      <JobDetail
-        filteredApplicants={filteredApplicants}
-        showSnackbar={showSnackbar}
-      />
-    </div>
+    <>
+      <div>
+        <Banner
+          filteredApplicants={filteredApplicants}
+          showSnackbar={showSnackbar}
+        />
+        <JobDetail
+          filteredApplicants={filteredApplicants}
+          showSnackbar={showSnackbar}
+        />
+      </div>
+      <div id="snackbar">Uploaded Successfully..</div>
+    </>
   );
 };
 
