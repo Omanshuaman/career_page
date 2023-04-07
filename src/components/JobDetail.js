@@ -159,26 +159,15 @@ const JobDetail = ({ filteredApplicants, showSnackbar }) => {
           </div>
           <div className="side-apply">
             <div className="apply-detail">
-              <Popup
-                trigger={
-                  <button className="apply-button" disabled={disabled}>
-                    Apply Now
-                  </button>
-                }
+              <button
+                className="apply-button"
+                type="button"
+                data-toggle="modal"
+                data-target="#exampleModalLong"
+                disabled={disabled}
               >
-                {(close) => (
-                  <div>
-                    <Modal
-                      modal={modal}
-                      setModal={setModal}
-                      openModal={openModal}
-                      close={close}
-                      jobId={filteredApplicants.id}
-                      showSnackbar={showSnackbar}
-                    />
-                  </div>
-                )}
-              </Popup>
+                Apply Now
+              </button>
 
               <div className="job-summary">
                 <div className="job-summarytext">Job Summary</div>
