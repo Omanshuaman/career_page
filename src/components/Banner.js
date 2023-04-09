@@ -1,20 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import AWS from "aws-sdk";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Modal from "./Modal";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 const Banner = ({ filteredApplicants, showSnackbar }) => {
-  AWS.config.update({
-    accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
-    region: "us-east-1",
-    signatureVersion: "v4",
-  });
-  const s3 = new AWS.S3();
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [contact, setContact] = useState("");
@@ -42,36 +32,38 @@ const Banner = ({ filteredApplicants, showSnackbar }) => {
       setContactError("* Contact number should be 10 or less than 10");
     }
   };
-
   const handleResumeChange = (event) => {
     setResume(event.target.files[0]);
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
-    const params = {
-      Bucket: process.env.REACT_APP_S3_BUCKET_NAME,
-      Key: `${Date.now()}-${resume.name}`,
-      Body: resume,
-    };
 
     try {
-      const data = await s3.upload(params).promise();
+      const formData = new FormData();
+      formData.append("demo file", resume, resume.name);
+
+      const uploadResponse = await axios.post(
+        "https://3pg8ch1ir2.execute-api.us-east-1.amazonaws.com/prod/file-upload",
+        formData
+      );
+
+      const uploadedFileUrl = uploadResponse.data.fileUrl;
+
       const newApplicant = {
         name: name,
         emailid: email,
         contactNumber: contact,
-        resumeUrl: data.Location,
+        resumeUrl: uploadedFileUrl,
         applied_date: appliedDate,
-        job_id: "jobId",
+        job_id: filteredApplicants.job_id,
       };
 
-      const res = await axios.post(
+      const applicantResponse = await axios.post(
         "https://3pg8ch1ir2.execute-api.us-east-1.amazonaws.com/prod/applicant",
         newApplicant
       );
 
-      toast("Uploaded Successfully!");
       setTimeout(() => {
         window.location.reload();
       }, 1000);
@@ -81,6 +73,7 @@ const Banner = ({ filteredApplicants, showSnackbar }) => {
       setIsLoading(false);
     }
   };
+
   const [disabled, setdisabled] = useState(false);
   const date = new Date();
   const formattedDate = `${date.getDate().toString().padStart(2, "0")}-${(
@@ -124,8 +117,6 @@ const Banner = ({ filteredApplicants, showSnackbar }) => {
           Apply Now
         </button>
       </div>
-      <ToastContainer />
-
       <div
         class="modal fade"
         id="exampleModalLong"
