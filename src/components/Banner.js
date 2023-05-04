@@ -10,8 +10,8 @@ const Banner = ({ filteredApplicants, showSnackbar }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [base64, setBase64] = useState("");
   const [textPosted, setTextPosted] = useState("");
-  const now = new Date();
-  const appliedDate = now.toISOString();
+  const [deadline, setDeadline] = useState("");
+
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
@@ -43,7 +43,7 @@ const Banner = ({ filteredApplicants, showSnackbar }) => {
         reader.onload = () => {
           const base64 = reader.result;
           const formData = new FormData();
-          formData.append("demo file", base64);
+          formData.append("demo file", base64, file);
 
           resolve(formData);
         };
@@ -65,7 +65,7 @@ const Banner = ({ filteredApplicants, showSnackbar }) => {
         emailid: email,
         contactNumber: contact,
         resumeUrl: uploadedFileUrl,
-        applied_date: appliedDate,
+        applied_date: Date.now() / 1000,
         job_id: filteredApplicants.job_id,
       };
       const applicantResponse = await axios.post(
@@ -84,31 +84,28 @@ const Banner = ({ filteredApplicants, showSnackbar }) => {
     }
   };
   const [disabled, setdisabled] = useState(false);
-  const date = new Date();
-  const formattedDate = `${date.getDate().toString().padStart(2, "0")}-${(
-    date.getMonth() + 1
-  )
-    .toString()
-    .padStart(2, "0")}-${date.getFullYear().toString()}`;
-  const date1 = formattedDate;
-  const date2 = filteredApplicants.deadline;
+
   const myInputRef = useRef(null);
   useEffect(() => {
     if (myInputRef.current) {
       myInputRef.current.focus();
     }
   }, []);
-  const formattedDate1 = date1.split("-").reverse().join("-");
-  const formattedDate2 = date2.split("-").reverse().join("-");
+
   useEffect(() => {
-    if (new Date(formattedDate1) > new Date(formattedDate2)) {
+    const timestamp = filteredApplicants.deadline; // replace with your timestamp
+    const now = Date.now() / 1000; // get current timestamp in seconds
+    const isLessThanToday = timestamp < now;
+    setDeadline(filteredApplicants.deadline);
+    if (isLessThanToday) {
+      console.log("This timestamp is less than today's timestamp.");
       setdisabled(true);
+    } else {
+      console.log(
+        "This timestamp is greater than or equal to today's timestamp."
+      );
     }
-  }, []);
-  const [alertVisible, setAlertVisible] = useState(true);
-  const closeAlert = () => {
-    setAlertVisible(false);
-  };
+  }, [filteredApplicants]);
   return (
     <div className="banner">
       <div className="banner-column">

@@ -95,58 +95,50 @@ const Openings = () => {
             className={
               activeTab === "Technology & IT" ? "tablinks active" : "tablinks"
             }
-            onClick={() => openCity("Technology & IT")}
-          >
+            onClick={() => openCity("Technology & IT")}>
             Technology & IT<sup>{filteredApplicants1.length}</sup>
           </button>
           <button
             className={
               activeTab === "Operations" ? "tablinks active" : "tablinks"
             }
-            onClick={() => openCity("Operations")}
-          >
+            onClick={() => openCity("Operations")}>
             Operations<sup>{filteredApplicants.length}</sup>
           </button>
           <button
             className={
               activeTab === "Product Marketing" ? "tablinks active" : "tablinks"
             }
-            onClick={() => openCity("Product Marketing")}
-          >
+            onClick={() => openCity("Product Marketing")}>
             Product Marketing<sup>{filteredApplicants2.length}</sup>
           </button>
           <button
             className={activeTab === "Sales" ? "tablinks active" : "tablinks"}
-            onClick={() => openCity("Sales")}
-          >
+            onClick={() => openCity("Sales")}>
             Sales<sup>{filteredApplicants5.length}</sup>
           </button>
           <button
             className={activeTab === "Finance" ? "tablinks active" : "tablinks"}
-            onClick={() => openCity("Finance")}
-          >
+            onClick={() => openCity("Finance")}>
             Finance<sup>{filteredApplicants4.length}</sup>
           </button>
           <button
             className={activeTab === "Legal" ? "tablinks active" : "tablinks"}
-            onClick={() => openCity("Legal")}
-          >
+            onClick={() => openCity("Legal")}>
             Legal<sup>{filteredApplicants3.length}</sup>
           </button>
           <button
             className={
               activeTab === "HR & Admin" ? "tablinks active" : "tablinks"
             }
-            onClick={() => openCity("HR & Admin")}
-          >
+            onClick={() => openCity("HR & Admin")}>
             HR & Admin<sup>{filteredApplicants6.length}</sup>
           </button>
           <button
             className={
               activeTab === "Customer Support" ? "tablinks active" : "tablinks"
             }
-            onClick={() => openCity("Customer Support")}
-          >
+            onClick={() => openCity("Customer Support")}>
             Customer Support<sup>{filteredApplicants6.length}</sup>
           </button>
         </div>
@@ -154,8 +146,7 @@ const Openings = () => {
           <div>Search By Department:</div>
           <select
             value={activeTab}
-            onChange={(e) => setActiveTab(e.target.value)}
-          >
+            onChange={(e) => setActiveTab(e.target.value)}>
             <option value="Technology & IT">Technology & IT</option>
             <option value="Operations">Operations</option>
             <option value="Product Marketing">Product Marketing</option>
@@ -171,8 +162,7 @@ const Openings = () => {
           id="Technology & IT"
           className={
             activeTab === "Technology & IT" ? "tabcontent" : "tabcontent hidden"
-          }
-        >
+          }>
           {isLoading ? (
             <div className="loading-text">Loading...</div>
           ) : (
@@ -180,8 +170,7 @@ const Openings = () => {
               return (
                 <div
                   className="job-container"
-                  onClick={() => nextPage(applicant.id, applicant)}
-                >
+                  onClick={() => nextPage(applicant.id, applicant)}>
                   <div className="job-name">{applicant.role}</div>
                   <div className="experience">
                     <div className="experience-text">Experience</div>
@@ -191,7 +180,11 @@ const Openings = () => {
                   </div>
                   <div className="deadline">
                     <div className="deadline-text">Deadline</div>
-                    <div className="deadline-year">{applicant.deadline}</div>
+                    <div className="deadline-year">
+                      {new Date(applicant.deadline * 1000).toLocaleDateString(
+                        "en-GB"
+                      )}
+                    </div>
                   </div>
                   <div className="next-vector">
                     <img src={Next} alt="Your SVG" className="next-svg" />
@@ -206,8 +199,7 @@ const Openings = () => {
           id="Operations"
           className={
             activeTab === "Operations" ? "tabcontent" : "tabcontent hidden"
-          }
-        >
+          }>
           {isLoading ? (
             <div className="loading-text">Loading...</div>
           ) : (
@@ -215,8 +207,7 @@ const Openings = () => {
               return (
                 <div
                   className="job-container"
-                  onClick={() => nextPage(applicant.id, applicant)}
-                >
+                  onClick={() => nextPage(applicant.id, applicant)}>
                   <div className="job-name">{applicant.role}</div>
                   <div className="experience">
                     <div className="experience-text">Experience</div>
@@ -226,7 +217,11 @@ const Openings = () => {
                   </div>
                   <div className="deadline">
                     <div className="deadline-text">Deadline</div>
-                    <div className="deadline-year">{applicant.deadline}</div>
+                    <div className="deadline-year">
+                      {new Date(applicant.deadline * 1000).toLocaleDateString(
+                        "en-GB"
+                      )}
+                    </div>
                   </div>
                   <div className="next-vector">
                     <img src={Next} alt="Your SVG" className="next-svg" />
@@ -243,8 +238,7 @@ const Openings = () => {
             activeTab === "Product Marketing"
               ? "tabcontent"
               : "tabcontent hidden"
-          }
-        >
+          }>
           {isLoading ? (
             <div className="loading-text">Loading...</div>
           ) : (
@@ -252,8 +246,7 @@ const Openings = () => {
               return (
                 <div
                   className="job-container"
-                  onClick={() => nextPage(applicant.id, applicant)}
-                >
+                  onClick={() => nextPage(applicant.id, applicant)}>
                   <div className="job-name">{applicant.role}</div>
                   <div className="experience">
                     <div className="experience-text">Experience</div>
@@ -263,7 +256,11 @@ const Openings = () => {
                   </div>
                   <div className="deadline">
                     <div className="deadline-text">Deadline</div>
-                    <div className="deadline-year">{applicant.deadline}</div>
+                    <div className="deadline-year">
+                      {new Date(applicant.deadline * 1000).toLocaleDateString(
+                        "en-GB"
+                      )}
+                    </div>
                   </div>
                   <div className="next-vector">
                     <img src={Next} alt="Your SVG" className="next-svg" />
@@ -275,8 +272,9 @@ const Openings = () => {
         </div>
         <div
           id="Sales"
-          className={activeTab === "Sales" ? "tabcontent" : "tabcontent hidden"}
-        >
+          className={
+            activeTab === "Sales" ? "tabcontent" : "tabcontent hidden"
+          }>
           {isLoading ? (
             <div className="loading-text">Loading...</div>
           ) : (
@@ -284,8 +282,7 @@ const Openings = () => {
               return (
                 <div
                   className="job-container"
-                  onClick={() => nextPage(applicant.id, applicant)}
-                >
+                  onClick={() => nextPage(applicant.id, applicant)}>
                   <div className="job-name">{applicant.role}</div>
                   <div className="experience">
                     <div className="experience-text">Experience</div>
@@ -295,7 +292,11 @@ const Openings = () => {
                   </div>
                   <div className="deadline">
                     <div className="deadline-text">Deadline</div>
-                    <div className="deadline-year">{applicant.deadline}</div>
+                    <div className="deadline-year">
+                      {new Date(applicant.deadline * 1000).toLocaleDateString(
+                        "en-GB"
+                      )}
+                    </div>
                   </div>
                   <div className="next-vector">
                     <img src={Next} alt="Your SVG" className="next-svg" />
@@ -309,8 +310,7 @@ const Openings = () => {
           id="Finance"
           className={
             activeTab === "Finance" ? "tabcontent" : "tabcontent hidden"
-          }
-        >
+          }>
           {isLoading ? (
             <div className="loading-text">Loading...</div>
           ) : (
@@ -318,8 +318,7 @@ const Openings = () => {
               return (
                 <div
                   className="job-container"
-                  onClick={() => nextPage(applicant.id, applicant)}
-                >
+                  onClick={() => nextPage(applicant.id, applicant)}>
                   <div className="job-name">{applicant.role}</div>
                   <div className="experience">
                     <div className="experience-text">Experience</div>
@@ -329,7 +328,11 @@ const Openings = () => {
                   </div>
                   <div className="deadline">
                     <div className="deadline-text">Deadline</div>
-                    <div className="deadline-year">{applicant.deadline}</div>
+                    <div className="deadline-year">
+                      {new Date(applicant.deadline * 1000).toLocaleDateString(
+                        "en-GB"
+                      )}
+                    </div>
                   </div>
                   <div className="next-vector">
                     <img src={Next} alt="Your SVG" className="next-svg" />
@@ -341,8 +344,9 @@ const Openings = () => {
         </div>
         <div
           id="Legal"
-          className={activeTab === "Legal" ? "tabcontent" : "tabcontent hidden"}
-        >
+          className={
+            activeTab === "Legal" ? "tabcontent" : "tabcontent hidden"
+          }>
           {isLoading ? (
             <div className="loading-text">Loading...</div>
           ) : (
@@ -350,8 +354,7 @@ const Openings = () => {
               return (
                 <div
                   className="job-container"
-                  onClick={() => nextPage(applicant.id, applicant)}
-                >
+                  onClick={() => nextPage(applicant.id, applicant)}>
                   <div className="job-name">{applicant.role}</div>
                   <div className="experience">
                     <div className="experience-text">Experience</div>
@@ -361,7 +364,11 @@ const Openings = () => {
                   </div>
                   <div className="deadline">
                     <div className="deadline-text">Deadline</div>
-                    <div className="deadline-year">{applicant.deadline}</div>
+                    <div className="deadline-year">
+                      {new Date(applicant.deadline * 1000).toLocaleDateString(
+                        "en-GB"
+                      )}
+                    </div>
                   </div>
                   <div className="next-vector">
                     <img src={Next} alt="Your SVG" className="next-svg" />
@@ -375,8 +382,7 @@ const Openings = () => {
           id="HR & Admin"
           className={
             activeTab === "HR & Admin" ? "tabcontent" : "tabcontent hidden"
-          }
-        >
+          }>
           {isLoading ? (
             <div className="loading-text">Loading...</div>
           ) : (
@@ -384,8 +390,7 @@ const Openings = () => {
               return (
                 <div
                   className="job-container"
-                  onClick={() => nextPage(applicant.id, applicant)}
-                >
+                  onClick={() => nextPage(applicant.id, applicant)}>
                   <div className="job-name">{applicant.role}</div>
                   <div className="experience">
                     <div className="experience-text">Experience</div>
@@ -395,7 +400,11 @@ const Openings = () => {
                   </div>
                   <div className="deadline">
                     <div className="deadline-text">Deadline</div>
-                    <div className="deadline-year">{applicant.deadline}</div>
+                    <div className="deadline-year">
+                      {new Date(applicant.deadline * 1000).toLocaleDateString(
+                        "en-GB"
+                      )}
+                    </div>
                   </div>
                   <div className="next-vector">
                     <img src={Next} alt="Your SVG" className="next-svg" />
@@ -411,8 +420,7 @@ const Openings = () => {
             activeTab === "Customer Support"
               ? "tabcontent"
               : "tabcontent hidden"
-          }
-        >
+          }>
           {isLoading ? (
             <div className="loading-text">Loading...</div>
           ) : (
@@ -420,8 +428,7 @@ const Openings = () => {
               return (
                 <div
                   className="job-container"
-                  onClick={() => nextPage(applicant.id, applicant)}
-                >
+                  onClick={() => nextPage(applicant.id, applicant)}>
                   <div className="job-name">{applicant.role}</div>
                   <div className="experience">
                     <div className="experience-text">Experience</div>
@@ -431,7 +438,11 @@ const Openings = () => {
                   </div>
                   <div className="deadline">
                     <div className="deadline-text">Deadline</div>
-                    <div className="deadline-year">{applicant.deadline}</div>
+                    <div className="deadline-year">
+                      {new Date(applicant.deadline * 1000).toLocaleDateString(
+                        "en-GB"
+                      )}
+                    </div>
                   </div>
                   <div className="next-vector">
                     <img src={Next} alt="Your SVG" className="next-svg" />

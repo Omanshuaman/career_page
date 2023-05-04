@@ -16,29 +16,29 @@ import Modal from "./Modal";
 import { useHistory } from "react-router-dom";
 
 const JobDetail = ({ filteredApplicants, showSnackbar }) => {
-  console.log(filteredApplicants);
   // Use the filteredApplicants prop here
   const [modal, setModal] = useState(false);
   const [disabled, setdisabled] = useState(false);
+  const [deadline, setDeadline] = useState("");
 
   const history = useHistory();
-  const date = new Date();
-  const formattedDate = `${date.getDate().toString().padStart(2, "0")}-${(
-    date.getMonth() + 1
-  )
-    .toString()
-    .padStart(2, "0")}-${date.getFullYear().toString()}`;
-  const date1 = formattedDate;
-  const date2 = filteredApplicants.deadline;
-
-  const formattedDate1 = date1.split("-").reverse().join("-");
-  const formattedDate2 = date2.split("-").reverse().join("-");
 
   useEffect(() => {
-    if (new Date(formattedDate1) > new Date(formattedDate2)) {
+    setDeadline(filteredApplicants.deadline);
+    const timestamp = filteredApplicants.deadline; // replace with your timestamp
+    const now = Date.now() / 1000; // get current timestamp in seconds
+    const isLessThanToday = timestamp < now;
+    if (isLessThanToday) {
+      console.log("This timestamp is less than today's timestamp.");
+      console.log(timestamp);
       setdisabled(true);
+    } else {
+      console.log(
+        "This timestamp is greater than or equal to today's timestamp."
+      );
     }
-  }, []);
+  }, [filteredApplicants]);
+
   const openModal = () => {
     setModal(!modal);
   };
@@ -164,8 +164,7 @@ const JobDetail = ({ filteredApplicants, showSnackbar }) => {
                 type="button"
                 data-toggle="modal"
                 data-target="#exampleModalLong"
-                disabled={disabled}
-              >
+                disabled={disabled}>
                 Apply Now
               </button>
 
@@ -178,9 +177,7 @@ const JobDetail = ({ filteredApplicants, showSnackbar }) => {
                   </div>
                   <div className="location-text">
                     <div className="location-blur">Job Id</div>
-                    <div className="location-text">
-                      {filteredApplicants.job_id}
-                    </div>
+                    <div className="location-text">{filteredApplicants.id}</div>
                   </div>
                 </div>
               </div>
@@ -190,8 +187,7 @@ const JobDetail = ({ filteredApplicants, showSnackbar }) => {
                     <img
                       src={Location}
                       alt="Your SVG"
-                      className="location-svg"
-                    ></img>
+                      className="location-svg"></img>
                   </div>
                   <div className="location-text">
                     <div className="location-blur">Location</div>
@@ -207,8 +203,7 @@ const JobDetail = ({ filteredApplicants, showSnackbar }) => {
                     <img
                       src={JobType}
                       alt="Your SVG"
-                      className="location-svg"
-                    ></img>
+                      className="location-svg"></img>
                   </div>
                   <div className="location-text">
                     <div className="location-blur">Job Type</div>
@@ -225,13 +220,14 @@ const JobDetail = ({ filteredApplicants, showSnackbar }) => {
                     <img
                       src={DatePosted}
                       alt="Your SVG"
-                      className="location-svg"
-                    ></img>
+                      className="location-svg"></img>
                   </div>
                   <div className="location-text">
                     <div className="location-blur">Date posted</div>
                     <div className="location-text">
-                      {filteredApplicants.job_post_date}
+                      {new Date(
+                        filteredApplicants.job_post_date * 1000
+                      ).toLocaleDateString("en-GB")}
                     </div>
                   </div>
                 </div>
@@ -242,8 +238,7 @@ const JobDetail = ({ filteredApplicants, showSnackbar }) => {
                     <img
                       src={Experience}
                       alt="Your SVG"
-                      className="location-svg"
-                    ></img>
+                      className="location-svg"></img>
                   </div>
                   <div className="location-text">
                     <div className="location-blur">Experience</div>
@@ -260,8 +255,7 @@ const JobDetail = ({ filteredApplicants, showSnackbar }) => {
                     <img
                       src={Vacancy}
                       alt="Your SVG"
-                      className="location-svg"
-                    ></img>
+                      className="location-svg"></img>
                   </div>
                   <div className="location-text">
                     <div className="location-blur">Vacancy</div>
@@ -283,26 +277,22 @@ const JobDetail = ({ filteredApplicants, showSnackbar }) => {
                 src={Facebook}
                 alt="Facebook"
                 className="social-svg"
-                onClick={shareOnFacebook}
-              ></img>
+                onClick={shareOnFacebook}></img>
               <img
                 src={Twitter}
                 alt="Twitter"
                 className="social-svg"
-                onClick={shareOnTwitter}
-              ></img>
+                onClick={shareOnTwitter}></img>
               <img
                 src={Linkedin}
                 alt="Linkedin"
                 className="social-svg"
-                onClick={shareOnLinkedin}
-              ></img>
+                onClick={shareOnLinkedin}></img>
               <img
                 src={Instagram}
                 alt="Instagram"
                 className="social-svg"
-                onClick={shareOnInstagram}
-              ></img>
+                onClick={shareOnInstagram}></img>
             </div>
           </div>
         </div>
