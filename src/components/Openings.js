@@ -95,7 +95,6 @@ const Openings = () => {
             className={
               activeTab === "Technology & IT" ? "tablinks active" : "tablinks"
             }
-            style={{ backgroundColor: "#030e29", color: "white" }}
             onClick={() => openCity("Technology & IT")}>
             Technology & IT<sup>{filteredApplicants1.length}</sup>
           </button>
@@ -103,7 +102,6 @@ const Openings = () => {
             className={
               activeTab === "Operations" ? "tablinks active" : "tablinks"
             }
-            style={{ backgroundColor: "#030e29", color: "white" }}
             onClick={() => openCity("Operations")}>
             Operations<sup>{filteredApplicants.length}</sup>
           </button>
@@ -111,25 +109,21 @@ const Openings = () => {
             className={
               activeTab === "Product Marketing" ? "tablinks active" : "tablinks"
             }
-            style={{ backgroundColor: "#030e29", color: "white" }}
             onClick={() => openCity("Product Marketing")}>
             Product Marketing<sup>{filteredApplicants2.length}</sup>
           </button>
           <button
             className={activeTab === "Sales" ? "tablinks active" : "tablinks"}
-            style={{ backgroundColor: "#030e29", color: "white" }}
             onClick={() => openCity("Sales")}>
             Sales<sup>{filteredApplicants5.length}</sup>
           </button>
           <button
             className={activeTab === "Finance" ? "tablinks active" : "tablinks"}
-            style={{ backgroundColor: "#030e29", color: "white" }}
             onClick={() => openCity("Finance")}>
             Finance<sup>{filteredApplicants4.length}</sup>
           </button>
           <button
             className={activeTab === "Legal" ? "tablinks active" : "tablinks"}
-            style={{ backgroundColor: "#030e29", color: "white" }}
             onClick={() => openCity("Legal")}>
             Legal<sup>{filteredApplicants3.length}</sup>
           </button>
@@ -137,7 +131,6 @@ const Openings = () => {
             className={
               activeTab === "HR & Admin" ? "tablinks active" : "tablinks"
             }
-            style={{ backgroundColor: "#030e29", color: "white" }}
             onClick={() => openCity("HR & Admin")}>
             HR & Admin<sup>{filteredApplicants6.length}</sup>
           </button>
@@ -145,7 +138,6 @@ const Openings = () => {
             className={
               activeTab === "Customer Support" ? "tablinks active" : "tablinks"
             }
-            style={{ backgroundColor: "#030e29", color: "white" }}
             onClick={() => openCity("Customer Support")}>
             Customer Support<sup>{filteredApplicants6.length}</sup>
           </button>

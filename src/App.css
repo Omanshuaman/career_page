@@ -245,7 +245,10 @@ body {
   align-items: center;
   width: 100%;
   gap: 2em;
-  margin-top: 8em;
+  padding-top: 8em;
+  padding-bottom: 4em;
+
+  background: #01091e;
 }
 .openings-container {
   display: flex;
@@ -253,7 +256,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #01091e;
   padding-bottom: 1rem;
 }
 .come-join-us {
