@@ -1,23 +1,40 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Toast from "react-bootstrap/Toast";
 const Banner = ({ filteredApplicants, showSnackbar }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [contact, setContact] = useState("");
   const [resume, setResume] = useState(null);
+  const [resumetext, setResumetext] = useState(null);
+
   const [contactError, setContactError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [base64, setBase64] = useState("");
   const [textPosted, setTextPosted] = useState("");
+  const [show, setShow] = useState(false);
+  const [showToast, setShowToast] = useState(false);
   const [deadline, setDeadline] = useState("");
+  const [disabled, setdisabled] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const now = new Date();
+  const appliedDate = now.getTime();
 
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
+
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
+
   const handleContactChange = (event) => {
     const value = event.target.value;
     if (value.length <= 10) {
@@ -27,8 +44,15 @@ const Banner = ({ filteredApplicants, showSnackbar }) => {
       setContactError("* Contact number should be 10 or less than 10");
     }
   };
+
   const handleResumeChange = (event) => {
-    setResume(event.target.files[0]);
+    const selectedFile = event.target.files[0];
+    if (selectedFile.name.endsWith(".pdf")) {
+      setResume(selectedFile);
+      setResumetext(selectedFile.name);
+    } else {
+      setTextPosted("Choose .pdf file only");
+    }
   };
 
   const handleSubmit = async (event) => {
@@ -43,7 +67,7 @@ const Banner = ({ filteredApplicants, showSnackbar }) => {
         reader.onload = () => {
           const base64 = reader.result;
           const formData = new FormData();
-          formData.append("demo file", base64, file);
+          formData.append(resumetext, base64);
 
           resolve(formData);
         };
@@ -58,6 +82,7 @@ const Banner = ({ filteredApplicants, showSnackbar }) => {
         "https://gsrhol3xd0.execute-api.ap-south-1.amazonaws.com/prod/file-upload",
         formData
       );
+
       const uploadedFileUrl = uploadResponse.data.fileUrl;
       const newApplicant = {
         Id: uuidv4(),
@@ -65,40 +90,32 @@ const Banner = ({ filteredApplicants, showSnackbar }) => {
         emailid: email,
         contactNumber: contact,
         resumeUrl: uploadedFileUrl,
-        applied_date: Date.now() / 1000,
+        applied_date: appliedDate,
         job_id: filteredApplicants.job_id,
       };
+
       const applicantResponse = await axios.post(
         "https://gsrhol3xd0.execute-api.ap-south-1.amazonaws.com/prod/applicant",
         newApplicant
       );
-      setTextPosted("Suucessfully Uploaded");
-      // Refresh the page after 5 seconds
+      setShowToast(true);
       setTimeout(() => {
-        window.location.reload();
-      }, 5000);
+        handleClose();
+      }, 3000);
     } catch (err) {
       console.log(err);
     } finally {
       setIsLoading(false);
     }
   };
-  const [disabled, setdisabled] = useState(false);
-
-  const myInputRef = useRef(null);
   useEffect(() => {
-    if (myInputRef.current) {
-      myInputRef.current.focus();
-    }
-  }, []);
-
-  useEffect(() => {
+    setDeadline(filteredApplicants.deadline);
     const timestamp = filteredApplicants.deadline; // replace with your timestamp
     const now = Date.now() / 1000; // get current timestamp in seconds
     const isLessThanToday = timestamp < now;
-    setDeadline(filteredApplicants.deadline);
     if (isLessThanToday) {
       console.log("This timestamp is less than today's timestamp.");
+      console.log(timestamp);
       setdisabled(true);
     } else {
       console.log(
@@ -106,99 +123,111 @@ const Banner = ({ filteredApplicants, showSnackbar }) => {
       );
     }
   }, [filteredApplicants]);
-  return (
-    <div className="banner">
-      <div className="banner-column">
-        <div className="banner-text1">{filteredApplicants.role}</div>
-        <div className="banner-text2">
-          Job Type: {filteredApplicants.job_type} | No of Vacancies:&nbsp;
-          {filteredApplicants.number_of_vacancy}
-        </div>
-        <button
-          className="apply-button"
-          type="button"
-          data-toggle="modal"
-          data-target="#exampleModalLong"
-          disabled={disabled}>
-          Apply Now
-        </button>
-      </div>
-      <div
-        class="modal fade"
-        id="exampleModalLong"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLongTitle"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div className="modal-content">
-                <div className="modal-padding">
-                  <form
-                    className="card-form"
-                    encType="multipart/form-data"
-                    onSubmit={handleSubmit}>
-                    <div className="name">Name</div>
-                    <input
-                      type="text"
-                      className="name-input"
-                      required
-                      onChange={handleNameChange}
-                    />
-                    <div className="name">Email ID</div>
-                    <input
-                      type="email"
-                      className="name-input"
-                      required
-                      onChange={handleEmailChange}
-                    />
-                    <div className="name">Contact Number:</div>
-                    <input
-                      type="tel"
-                      className="name-input"
-                      required
-                      pattern="[0-9]{10}"
-                      onChange={handleContactChange}
-                    />
+  const myInputRef = useRef(null);
 
-                    {contactError && (
-                      <div className="error">{contactError}</div>
-                    )}
-                    <div className="name">Upload Resume/CV:</div>
-                    <input
-                      type="file"
-                      name="resume"
-                      className="name-input"
-                      accept=".pdf"
-                      required
-                      onChange={handleResumeChange}
-                    />
-                    {isLoading && <div className="loader"></div>}
-                    <button
-                      className="action-button"
-                      type="submit"
-                      disabled={isLoading}>
-                      {isLoading ? "Uploading..." : "Upload"}
-                    </button>
-                  </form>
-                  <h4>{textPosted}</h4>
-                </div>
-              </div>
-            </div>
+  useEffect(() => {
+    if (myInputRef.current) {
+      myInputRef.current.focus();
+    }
+  }, []);
+
+  const [alertVisible, setAlertVisible] = useState(true);
+
+  const closeAlert = () => {
+    setAlertVisible(false);
+  };
+  return (
+    <>
+      <div className="banner">
+        <div className="banner-column">
+          <div className="banner-text1">{filteredApplicants.role}</div>
+          <div className="banner-text2">
+            Job Type: {filteredApplicants.job_type} | No of Vacancies:&nbsp;
+            {filteredApplicants.number_of_vacancy}
           </div>
+
+          <button
+            variant="primary"
+            className="apply-button"
+            onClick={handleShow}
+            disabled={disabled}>
+            Apply Now
+          </button>
         </div>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton></Modal.Header>
+          <Modal.Body>
+            <div className="modal-padding">
+              <form
+                className="card-form"
+                encType="multipart/form-data"
+                onSubmit={handleSubmit}>
+                <div className="name">Name</div>
+                <input
+                  type="text"
+                  className="name-input"
+                  required
+                  onChange={handleNameChange}
+                />
+                <div className="name">Email ID</div>
+                <input
+                  type="email"
+                  className="name-input"
+                  required
+                  onChange={handleEmailChange}
+                />
+                <div className="name">Contact Number:</div>
+                <input
+                  type="tel"
+                  className="name-input"
+                  required
+                  pattern="[0-9]{10}"
+                  onChange={handleContactChange}
+                />
+
+                {contactError && <div className="error">{contactError}</div>}
+                <div className="name">Upload Resume/CV:</div>
+                <input
+                  type="file"
+                  name="resume"
+                  className="name-input"
+                  accept=".pdf"
+                  required
+                  onChange={handleResumeChange}
+                />
+                {isLoading && <div className="loader"></div>}
+                <button
+                  className="action-button"
+                  type="submit"
+                  disabled={isLoading}>
+                  {isLoading ? "Uploading..." : "Upload"}
+                </button>
+              </form>
+
+              <Toast
+                onClose={() => setShowToast(false)}
+                bg="success"
+                show={showToast}
+                delay={3000}
+                autohide>
+                <Toast.Header>
+                  <img
+                    src="holder.js/20x20?text=%20"
+                    className="rounded me-2"
+                    alt=""
+                  />
+                  <strong className="me-auto">Success</strong>
+                </Toast.Header>
+                <Toast.Body className={"text-white"}>
+                  Successfully Uploaded!
+                </Toast.Body>
+              </Toast>
+            </div>
+          </Modal.Body>
+        </Modal>
       </div>
-    </div>
+    </>
   );
 };
+
 export default Banner;
